@@ -250,15 +250,17 @@ case class EntryPoint(pipeline: DataPipelineDefGroup) {
       )
   }
 
-  def run(args: Array[String]): Int = parser.parse(args, Options()).map { cli =>
-    val wrappedPipeline = DataPipelineDefGroupWrapper(pipeline)
-      .withTags(cli.tags)
-      .withName(cli.customName.getOrElse(pipeline.pipelineName))
-      .withSchedule(cli.schedule.getOrElse(pipeline.schedule))
+  def run(args: Array[String]): Int = {
+    parser.parse(args, Options()).map { cli =>
+      val wrappedPipeline = DataPipelineDefGroupWrapper(pipeline)
+        .withTags(cli.tags)
+        .withName(cli.customName.getOrElse(pipeline.pipelineName))
+        .withSchedule(cli.schedule.getOrElse(pipeline.schedule))
 
-    for { (id, value) <- cli.params } wrappedPipeline.setParameterValue(id, value)
+      for { (id, value) <- cli.params } wrappedPipeline.setParameterValue(id, value)
 
-    if (cli.action(cli, wrappedPipeline)) 0 else 3
-  }.getOrElse(3)
+      if (cli.action(cli, wrappedPipeline)) 0 else 3
+    }.getOrElse(3)
+  }
 
 }

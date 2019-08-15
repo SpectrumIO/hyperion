@@ -2,10 +2,9 @@ package com.krux.hyperion.client
 
 import scala.collection.JavaConverters._
 import com.amazonaws.services.datapipeline.DataPipeline
-import com.amazonaws.services.datapipeline.model.{CreatePipelineRequest, InvalidRequestException,
-  PipelineObject, PutPipelineDefinitionRequest, Tag}
-import org.slf4j.LoggerFactory
-import com.krux.hyperion.DataPipelineDefGroup
+import com.amazonaws.services.datapipeline.model.{CreatePipelineRequest, InvalidRequestException, ParameterObject, PipelineObject, PutPipelineDefinitionRequest, Tag}
+import org.slf4j.{Logger, LoggerFactory}
+import com.krux.hyperion.{DataPipelineDefGroup, WorkflowKey}
 import com.krux.stubborn.Retryable
 import com.krux.stubborn.policy.ExponentialBackoffAndJitter
 
@@ -16,11 +15,11 @@ case class UploadPipelineObjectsTrans(
   override val maxRetry: Int
 ) extends Transaction[Option[Unit], AwsClientForId] with Retryable with ExponentialBackoffAndJitter {
 
-  val log = LoggerFactory.getLogger(getClass)
+  val log: Logger = LoggerFactory.getLogger(getClass)
 
-  val parameterObjects = pipelineDef.toAwsParameters
+  val parameterObjects: Seq[ParameterObject] = pipelineDef.toAwsParameters
 
-  val keyObjectsMap = pipelineDef.toAwsPipelineObjects
+  val keyObjectsMap: Map[WorkflowKey, Seq[PipelineObject]] = pipelineDef.toAwsPipelineObjects
 
   private def createAndUploadObjects(name: String, objects: Seq[PipelineObject]): Option[String] = {
 
@@ -83,22 +82,24 @@ case class UploadPipelineObjectsTrans(
 
   }
 
-  def action() = AwsClientForId(
-    client,
-    keyObjectsMap
-      .toStream  // there is no need to keep perform createAndUploadObojects if one failed
-      .map { case (key, objects) =>
+  def action(): AwsClientForId = {
+    AwsClientForId(
+      client,
+      keyObjectsMap
+        .toStream  // there is no need to keep perform createAndUploadObojects if one failed
+        .map { case (key, objects) =>
         log.info(s"Creating pipeline and uploading ${objects.size} objects")
         createAndUploadObjects(pipelineDef.nameForKey(key), objects)
       }
-      .takeWhile(_.nonEmpty)
-      .flatten
-      .toSet,
-    maxRetry
-  )
+        .takeWhile(_.nonEmpty)
+        .flatten
+        .toSet,
+      maxRetry
+    )
+  }
 
-  def validate(result: AwsClientForId) = result.pipelineIds.size == keyObjectsMap.size
+  def validate(result: AwsClientForId): Boolean = result.pipelineIds.size == keyObjectsMap.size
 
-  def rollback(result: AwsClientForId) = result.deletePipelines()
+  def rollback(result: AwsClientForId): Option[Unit] = result.deletePipelines()
 
 }

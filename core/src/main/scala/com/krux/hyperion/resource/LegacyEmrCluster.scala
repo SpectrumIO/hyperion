@@ -3,16 +3,15 @@ package com.krux.hyperion.resource
 import org.slf4j.LoggerFactory
 
 import com.krux.hyperion.adt.HString
-import com.krux.hyperion.common.{PipelineObjectId, BaseFields}
+import com.krux.hyperion.common.{ PipelineObjectId, BaseFields }
 import com.krux.hyperion.HyperionContext
-
 
 /**
  * Use AMI versions to launch EMR clusters. Use EmrCluster for release label 4.x.x or later
  */
-case class LegacyEmrCluster private(
-  baseFields: BaseFields,
-  resourceFields: ResourceFields,
+case class LegacyEmrCluster private (
+  baseFields:       BaseFields,
+  resourceFields:   ResourceFields,
   emrClusterFields: EmrClusterFields
 ) extends BaseEmrCluster {
 
@@ -47,7 +46,7 @@ object LegacyEmrCluster {
       coreInstanceType = Option(hc.emrInstanceType: HString),
       taskInstanceCount = 0,
       taskInstanceType = Option(hc.emrInstanceType: HString),
-      releaseLabel = None  // make sure release label is not set
+      releaseLabel = None // make sure release label is not set
     )
 
 }

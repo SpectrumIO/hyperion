@@ -7,17 +7,17 @@ import com.krux.hyperion.expression.RunnableObject
 import com.krux.hyperion.resource.{ Ec2Resource, Resource }
 
 case class SendSlackMessageActivity private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[Ec2Resource],
+  baseFields:                 BaseFields,
+  activityFields:             ActivityFields[Ec2Resource],
   shellCommandActivityFields: ShellCommandActivityFields,
-  jarUri: HString,
-  mainClass: HString,
-  continueOnError: HBoolean,
-  webhookUrl: HString,
-  message: Seq[HString],
-  user: Option[HString],
-  emoji: Option[HString],
-  to: Option[HString]
+  jarUri:                     HString,
+  mainClass:                  HString,
+  continueOnError:            HBoolean,
+  webhookUrl:                 HString,
+  message:                    Seq[HString],
+  user:                       Option[HString],
+  emoji:                      Option[HString],
+  to:                         Option[HString]
 ) extends BaseShellCommandActivity {
 
   type Self = SendSlackMessageActivity

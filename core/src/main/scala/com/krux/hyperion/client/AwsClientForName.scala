@@ -8,12 +8,11 @@ import com.amazonaws.services.datapipeline.model.ListPipelinesRequest
 
 import com.krux.hyperion.DataPipelineDefGroup
 
-
 case class AwsClientForName(
-  client: DataPipeline,
-  pipelineName: String,
+  client:                DataPipeline,
+  pipelineName:          String,
   override val maxRetry: Int,
-  nameKeySeparator: String = DataPipelineDefGroup.DefaultNameKeySeparator
+  nameKeySeparator:      String       = DataPipelineDefGroup.DefaultNameKeySeparator
 ) extends AwsClient {
 
   lazy val pipelineIdNames: Map[String, String] = getPipelineIdNames()
@@ -27,9 +26,9 @@ case class AwsClientForName(
 
     @tailrec
     def queryPipelines(
-        idNames: Map[String, String] = Map.empty,
-        request: ListPipelinesRequest = new ListPipelinesRequest()
-      ): Map[String, String] = {
+      idNames: Map[String, String]  = Map.empty,
+      request: ListPipelinesRequest = new ListPipelinesRequest()
+    ): Map[String, String] = {
 
       val response = client.listPipelines(request).retry()
       val theseIdNames = response.getPipelineIdList

@@ -8,12 +8,12 @@ import scopt.OptionParser
 
 object SendSlackMessage {
   case class Options(
-    failOnError: Boolean = false,
-    webhookUrl: String = "",
-    user: Option[String] = None,
-    message: Seq[String] = Seq.empty,
-    iconEmoji: Option[String] = None,
-    channel: Option[String] = None
+    failOnError: Boolean        = false,
+    webhookUrl:  String         = "",
+    user:        Option[String] = None,
+    message:     Seq[String]    = Seq.empty,
+    iconEmoji:   Option[String] = None,
+    channel:     Option[String] = None
   )
 
   def apply(options: Options): Boolean = try {
@@ -32,9 +32,9 @@ object SendSlackMessage {
         "username" -> options.user,
         "text" -> Option(options.message.mkString("\n"))
       ).flatMap {
-        case (k, None) => None
-        case (k, Some(v)) => Option(k -> JString(v))
-      }
+          case (k, None)    => None
+          case (k, Some(v)) => Option(k -> JString(v))
+        }
 
       output.write(compact(render(JObject(message: _*))).getBytes)
     } finally {

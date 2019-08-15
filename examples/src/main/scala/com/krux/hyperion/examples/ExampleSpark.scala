@@ -5,14 +5,13 @@ import scala.language.postfixOps
 import com.typesafe.config.ConfigFactory
 
 import com.krux.hyperion.action.SnsAlarm
-import com.krux.hyperion.activity.{EmrActivity, SparkStep, SparkTaskActivity}
+import com.krux.hyperion.activity.{ EmrActivity, SparkStep, SparkTaskActivity }
 import com.krux.hyperion.common.S3Uri
 import com.krux.hyperion.datanode.S3DataNode
-import com.krux.hyperion.expression.{Parameter, RuntimeNode}
+import com.krux.hyperion.expression.{ Parameter, RuntimeNode }
 import com.krux.hyperion.Implicits._
-import com.krux.hyperion.resource.{EmrCluster, EmrApplication}
-import com.krux.hyperion.{DataPipelineDef, HyperionCli, HyperionContext, Schedule}
-
+import com.krux.hyperion.resource.{ EmrCluster, EmrApplication }
+import com.krux.hyperion.{ DataPipelineDef, HyperionCli, HyperionContext, Schedule }
 
 object ExampleSpark extends DataPipelineDef with HyperionCli {
 

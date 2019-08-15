@@ -1,29 +1,29 @@
 package com.krux.hyperion.activity
 
-import com.krux.hyperion.adt.{HBoolean, HInt, HS3Uri, HString, HType}
-import com.krux.hyperion.common.{BaseFields, PipelineObjectId, S3Uri}
-import com.krux.hyperion.expression.{EncryptedParameter, RunnableObject}
+import com.krux.hyperion.adt.{ HBoolean, HInt, HS3Uri, HString, HType }
+import com.krux.hyperion.common.{ BaseFields, PipelineObjectId, S3Uri }
+import com.krux.hyperion.expression.{ EncryptedParameter, RunnableObject }
 import com.krux.hyperion.HyperionContext
-import com.krux.hyperion.resource.{Ec2Resource, Resource}
+import com.krux.hyperion.resource.{ Ec2Resource, Resource }
 
 case class SendEmailActivity private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[Ec2Resource],
+  baseFields:                 BaseFields,
+  activityFields:             ActivityFields[Ec2Resource],
   shellCommandActivityFields: ShellCommandActivityFields,
-  jarUri: HS3Uri,
-  mainClass: HString,
-  host: Option[HString],
-  port: Option[HInt],
-  username: Option[HString],
-  password: Option[EncryptedParameter[String]],
-  from: Option[HString],
-  to: Seq[HString],
-  cc: Seq[HString],
-  bcc: Seq[HString],
-  subject: Option[HString],
-  body: Option[HString],
-  starttls: HBoolean,
-  debug: HBoolean
+  jarUri:                     HS3Uri,
+  mainClass:                  HString,
+  host:                       Option[HString],
+  port:                       Option[HInt],
+  username:                   Option[HString],
+  password:                   Option[EncryptedParameter[String]],
+  from:                       Option[HString],
+  to:                         Seq[HString],
+  cc:                         Seq[HString],
+  bcc:                        Seq[HString],
+  subject:                    Option[HString],
+  body:                       Option[HString],
+  starttls:                   HBoolean,
+  debug:                      HBoolean
 ) extends BaseShellCommandActivity with WithS3Input {
 
   type Self = SendEmailActivity

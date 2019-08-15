@@ -9,13 +9,13 @@ import com.krux.hyperion.common.{ BaseFields, PipelineObjectId }
  * The abstracted RedshiftDataNode
  */
 case class RedshiftDataNode private (
-  baseFields: BaseFields,
+  baseFields:     BaseFields,
   dataNodeFields: DataNodeFields,
-  database: RedshiftDatabase,
-  tableName: HString,
+  database:       RedshiftDatabase,
+  tableName:      HString,
   createTableSql: Option[HString],
-  schemaName: Option[HString],
-  primaryKeys: Seq[HString]
+  schemaName:     Option[HString],
+  primaryKeys:    Seq[HString]
 ) extends DataNode {
 
   type Self = RedshiftDataNode

@@ -8,12 +8,12 @@ import com.krux.hyperion.DataPipelineDef
 import com.typesafe.config.Config
 
 case class WorkflowGraphRenderer(
-  pipeline: DataPipelineDef,
+  pipeline:              DataPipelineDef,
   removeLastNameSegment: Boolean,
-  label: String,
-  includeResources: Boolean,
-  includeDataNodes: Boolean,
-  includeDatabases: Boolean
+  label:                 String,
+  includeResources:      Boolean,
+  includeDataNodes:      Boolean,
+  includeDatabases:      Boolean
 ) {
 
   private lazy val pipelineObjects: Iterable[PipelineObject] = pipeline.toAwsPipelineObjects.values.flatten
@@ -24,9 +24,9 @@ case class WorkflowGraphRenderer(
 
   private lazy val idToLabelMap: Map[String, String] = pipelineObjects.flatMap { obj =>
     label match {
-      case "id" => Option(obj.getId -> stripId(obj.getId))
+      case "id"   => Option(obj.getId -> stripId(obj.getId))
       case "name" => Option(obj.getId -> obj.getName)
-      case _ => obj.getFields.asScala.find(_.getKey == label).map(f => obj.getId -> Option(f.getStringValue).getOrElse(stripId(obj.getId)))
+      case _      => obj.getFields.asScala.find(_.getKey == label).map(f => obj.getId -> Option(f.getStringValue).getOrElse(stripId(obj.getId)))
     }
   }.toMap
 
@@ -35,7 +35,7 @@ case class WorkflowGraphRenderer(
   private def quoted(s: String) = s""""$s""""
 
   private def getLabel(id: String) = quoted(idToLabelMap.getOrElse(id, stripId(id)) match {
-    case "" => id
+    case ""      => id
     case idLabel => idLabel
   })
 
@@ -64,35 +64,35 @@ case class WorkflowGraphRenderer(
     val parts = Seq(
       s"strict digraph ${quoted(pipeline.pipelineName)} {"
     ) ++ pipelineObjects.flatMap { obj =>
-      obj.getFields.asScala.flatMap { field =>
-        field.getKey match {
-          case "type" =>
-            getAttributes(field.getStringValue, pipeline.hc.graphStyles).flatMap { attrs =>
-              ifNodeIncluded(field.getStringValue) {
-                renderNode(obj.getId, attrs)
+        obj.getFields.asScala.flatMap { field =>
+          field.getKey match {
+            case "type" =>
+              getAttributes(field.getStringValue, pipeline.hc.graphStyles).flatMap { attrs =>
+                ifNodeIncluded(field.getStringValue) {
+                  renderNode(obj.getId, attrs)
+                }
               }
-            }
 
-          case "output" if includeDataNodes =>
-            Option(renderEdge(obj.getId, field.getRefValue))
+            case "output" if includeDataNodes =>
+              Option(renderEdge(obj.getId, field.getRefValue))
 
-          case "input" if includeDataNodes =>
-            Option(renderEdge(field.getRefValue, obj.getId))
+            case "input" if includeDataNodes =>
+              Option(renderEdge(field.getRefValue, obj.getId))
 
-          case "dependsOn" =>
-            Option(renderEdge(field.getRefValue, obj.getId))
+            case "dependsOn" =>
+              Option(renderEdge(field.getRefValue, obj.getId))
 
-          case "runsOn" if includeResources =>
-            Option(renderEdge(field.getRefValue, obj.getId))
+            case "runsOn" if includeResources =>
+              Option(renderEdge(field.getRefValue, obj.getId))
 
-          case _ => None
+            case _ => None
+          }
+
         }
-
-      }
-    } ++ Seq(
-      "}",
-      ""
-    )
+      } ++ Seq(
+        "}",
+        ""
+      )
 
     parts.mkString("\n")
   }

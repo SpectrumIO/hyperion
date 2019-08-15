@@ -1,7 +1,6 @@
 package com.krux.hyperion.expression
 
-import org.joda.time.{DateTimeZone, DateTime}
-
+import org.joda.time.{ DateTimeZone, DateTime }
 
 trait ConstantExpression[T] extends Expression with Evaluatable[T] {
   def constantValue: T
@@ -37,7 +36,8 @@ case class DateTimeConstantExp(constantValue: DateTime) extends ConstantExpressi
           utc.getMonthOfYear,
           utc.getDayOfMonth,
           utc.getHourOfDay,
-          utc.getMinuteOfHour)
+          utc.getMinuteOfHour
+        )
 
     funcDt.content
 

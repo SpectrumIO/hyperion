@@ -42,17 +42,17 @@ trait AdpDataNode extends AdpDataPipelineObject {
  * @param readThroughputPercent Sets the rate of read operations to keep your DynamoDB provisioned throughput rate in the allocated range for your table. The value is a double between .1 and 1.0, inclusively. For more information, see Specifying Read and Write Requirements for Tables.
  * @param writeThroughputPercent  Sets the rate of write operations to keep your DynamoDB provisioned throughput rate in the allocated range for your table. The value is a double between .1 and 1.0, inclusively. For more information, see Specifying Read and Write Requirements for Tables.
  */
-case class AdpDynamoDBDataNode (
-  id: String,
-  name: Option[String],
-  tableName: String,
-  region: Option[String],
-  dynamoDBDataFormat: Option[AdpRef[AdpDataFormat]],
-  readThroughputPercent: Option[String],
+case class AdpDynamoDBDataNode(
+  id:                     String,
+  name:                   Option[String],
+  tableName:              String,
+  region:                 Option[String],
+  dynamoDBDataFormat:     Option[AdpRef[AdpDataFormat]],
+  readThroughputPercent:  Option[String],
   writeThroughputPercent: Option[String],
-  precondition: Option[Seq[AdpRef[AdpPrecondition]]],
-  onSuccess: Option[Seq[AdpRef[AdpSnsAlarm]]],
-  onFail: Option[Seq[AdpRef[AdpSnsAlarm]]]
+  precondition:           Option[Seq[AdpRef[AdpPrecondition]]],
+  onSuccess:              Option[Seq[AdpRef[AdpSnsAlarm]]],
+  onFail:                 Option[Seq[AdpRef[AdpSnsAlarm]]]
 ) extends AdpDataNode {
 
   val `type` = "DynamoDBDataNode"
@@ -63,17 +63,17 @@ case class AdpDynamoDBDataNode (
  * You must provide either a filePath or directoryPath value.
  */
 case class AdpS3DataNode(
-  id: String,
-  name: Option[String],
-  directoryPath: Option[String],
-  filePath: Option[String],
-  dataFormat: Option[AdpRef[AdpDataFormat]],
+  id:               String,
+  name:             Option[String],
+  directoryPath:    Option[String],
+  filePath:         Option[String],
+  dataFormat:       Option[AdpRef[AdpDataFormat]],
   manifestFilePath: Option[String],
-  compression: Option[String],
+  compression:      Option[String],
   s3EncryptionType: Option[String],
-  precondition: Option[Seq[AdpRef[AdpPrecondition]]],
-  onSuccess: Option[Seq[AdpRef[AdpSnsAlarm]]],
-  onFail: Option[Seq[AdpRef[AdpSnsAlarm]]]
+  precondition:     Option[Seq[AdpRef[AdpPrecondition]]],
+  onSuccess:        Option[Seq[AdpRef[AdpSnsAlarm]]],
+  onFail:           Option[Seq[AdpRef[AdpSnsAlarm]]]
 ) extends AdpDataNode {
 
   val `type` = "S3DataNode"
@@ -89,16 +89,16 @@ case class AdpS3DataNode(
  * overrides the existing key.
  */
 case class AdpRedshiftDataNode(
-  id: String,
-  name: Option[String],
+  id:             String,
+  name:           Option[String],
   createTableSql: Option[String],
-  database: AdpRef[AdpRedshiftDatabase],
-  schemaName: Option[String],
-  tableName: String,
-  primaryKeys: Option[Seq[String]],
-  precondition: Option[Seq[AdpRef[AdpPrecondition]]],
-  onSuccess: Option[Seq[AdpRef[AdpSnsAlarm]]],
-  onFail: Option[Seq[AdpRef[AdpSnsAlarm]]]
+  database:       AdpRef[AdpRedshiftDatabase],
+  schemaName:     Option[String],
+  tableName:      String,
+  primaryKeys:    Option[Seq[String]],
+  precondition:   Option[Seq[AdpRef[AdpPrecondition]]],
+  onSuccess:      Option[Seq[AdpRef[AdpSnsAlarm]]],
+  onFail:         Option[Seq[AdpRef[AdpSnsAlarm]]]
 ) extends AdpDataNode {
 
   val `type` = "RedshiftDataNode"
@@ -118,15 +118,15 @@ case class AdpRedshiftDataNode(
  * }}}
  */
 case class AdpSqlDataNode(
-  id: String,
-  name: Option[String],
-  database: AdpRef[AdpDatabase],
-  table: String,
-  selectQuery: Option[String],
-  insertQuery: Option[String],
+  id:           String,
+  name:         Option[String],
+  database:     AdpRef[AdpDatabase],
+  table:        String,
+  selectQuery:  Option[String],
+  insertQuery:  Option[String],
   precondition: Option[Seq[AdpRef[AdpPrecondition]]],
-  onSuccess: Option[Seq[AdpRef[AdpSnsAlarm]]],
-  onFail: Option[Seq[AdpRef[AdpSnsAlarm]]]
+  onSuccess:    Option[Seq[AdpRef[AdpSnsAlarm]]],
+  onFail:       Option[Seq[AdpRef[AdpSnsAlarm]]]
 ) extends AdpDataNode {
 
   val `type` = "SqlDataNode"

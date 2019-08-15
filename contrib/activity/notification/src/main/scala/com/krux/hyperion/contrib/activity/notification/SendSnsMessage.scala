@@ -4,16 +4,16 @@ import scala.collection.JavaConverters._
 
 import com.amazonaws.regions.Regions
 import com.amazonaws.services.sns.AmazonSNSClientBuilder
-import com.amazonaws.services.sns.model.{MessageAttributeValue, PublishRequest}
+import com.amazonaws.services.sns.model.{ MessageAttributeValue, PublishRequest }
 import scopt.OptionParser
 
 object SendSnsMessage {
   case class Options(
-    region: Option[String] = None,
-    topicArn: Option[String] = None,
-    message: Option[String] = None,
-    subject: Option[String] = None,
-    json: Boolean = false,
+    region:     Option[String]      = None,
+    topicArn:   Option[String]      = None,
+    message:    Option[String]      = None,
+    subject:    Option[String]      = None,
+    json:       Boolean             = false,
     attributes: Map[String, String] = Map.empty
   )
 
@@ -36,9 +36,9 @@ object SendSnsMessage {
     if (options.attributes.nonEmpty) {
       request.setMessageAttributes(options.attributes.flatMap { case (k, v) =>
         k.split(":").toList match {
-          case key :: dataType :: Nil => Option(key -> new MessageAttributeValue().withStringValue(v).withDataType(dataType))
-          case key :: Nil => Option(key -> new MessageAttributeValue().withStringValue(v).withDataType("String"))
-          case _ => None
+          case key :: dataType :: Nil   => Option(key -> new MessageAttributeValue().withStringValue(v).withDataType(dataType))
+          case key :: Nil               => Option(key -> new MessageAttributeValue().withStringValue(v).withDataType("String"))
+          case _                        => None
         }
       }.asJava)
     }

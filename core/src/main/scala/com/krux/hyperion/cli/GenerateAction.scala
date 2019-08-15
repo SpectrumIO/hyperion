@@ -6,7 +6,6 @@ import org.json4s.jackson.JsonMethods._
 
 import com.krux.hyperion.DataPipelineDefGroup
 
-
 private[hyperion] case object GenerateAction extends Action {
 
   def apply(options: Options, defGroup: DataPipelineDefGroup): Boolean = {

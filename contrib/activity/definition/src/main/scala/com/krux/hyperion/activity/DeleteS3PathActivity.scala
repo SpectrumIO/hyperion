@@ -9,10 +9,10 @@ import com.krux.hyperion.resource.{ Ec2Resource, Resource }
  * Activity to recursively delete files in an S3 path.
  */
 case class DeleteS3PathActivity private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[Ec2Resource],
+  baseFields:                 BaseFields,
+  activityFields:             ActivityFields[Ec2Resource],
   shellCommandActivityFields: ShellCommandActivityFields,
-  s3Path: HS3Uri
+  s3Path:                     HS3Uri
 ) extends BaseShellCommandActivity {
 
   type Self = DeleteS3PathActivity
@@ -23,14 +23,13 @@ case class DeleteS3PathActivity private (
 
   def ifExists(existsS3Path: HS3Uri) = updateShellCommandActivityFields(
     shellCommandActivityFields.copy(script =
-        s"""count=`aws s3 ls $existsS3Path | wc -l`;
+      s"""count=`aws s3 ls $existsS3Path | wc -l`;
             if [[ $$count -gt 0 ]];
             then
               aws s3 rm --recursive $s3Path;
             fi
-        """
-      )
-    )
+        """)
+  )
 }
 
 object DeleteS3PathActivity extends RunnableObject {

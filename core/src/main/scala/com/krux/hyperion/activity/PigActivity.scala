@@ -1,11 +1,11 @@
 package com.krux.hyperion.activity
 
-import com.krux.hyperion.adt.{HString, HS3Uri, HBoolean}
+import com.krux.hyperion.adt.{ HString, HS3Uri, HBoolean }
 import com.krux.hyperion.aws.AdpPigActivity
-import com.krux.hyperion.common.{PipelineObjectId, BaseFields}
+import com.krux.hyperion.common.{ PipelineObjectId, BaseFields }
 import com.krux.hyperion.datanode.DataNode
 import com.krux.hyperion.expression.RunnableObject
-import com.krux.hyperion.resource.{Resource, BaseEmrCluster}
+import com.krux.hyperion.resource.{ Resource, BaseEmrCluster }
 
 /**
  * PigActivity provides native support for Pig scripts in AWS Data Pipeline without the requirement
@@ -14,15 +14,15 @@ import com.krux.hyperion.resource.{Resource, BaseEmrCluster}
  * without additional code from the user.
  */
 case class PigActivity[A <: BaseEmrCluster] private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[A],
+  baseFields:            BaseFields,
+  activityFields:        ActivityFields[A],
   emrTaskActivityFields: EmrTaskActivityFields,
-  script: Script,
-  scriptVariables: Seq[HString],
-  generatedScriptsPath: Option[HS3Uri],
-  stage: Option[HBoolean],
-  input: Option[DataNode],
-  output: Option[DataNode]
+  script:                Script,
+  scriptVariables:       Seq[HString],
+  generatedScriptsPath:  Option[HS3Uri],
+  stage:                 Option[HBoolean],
+  input:                 Option[DataNode],
+  output:                Option[DataNode]
 ) extends EmrTaskActivity[A] {
 
   type Self = PigActivity[A]

@@ -1,23 +1,23 @@
 package com.krux.hyperion.activity
 
-import com.krux.hyperion.adt.{HBoolean, HString}
-import com.krux.hyperion.common.{BaseFields, PipelineObjectId, S3Uri}
+import com.krux.hyperion.adt.{ HBoolean, HString }
+import com.krux.hyperion.common.{ BaseFields, PipelineObjectId, S3Uri }
 import com.krux.hyperion.expression.RunnableObject
 import com.krux.hyperion.HyperionContext
-import com.krux.hyperion.resource.{Ec2Resource, Resource}
+import com.krux.hyperion.resource.{ Ec2Resource, Resource }
 
 case class SendSnsMessageActivity private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[Ec2Resource],
+  baseFields:                 BaseFields,
+  activityFields:             ActivityFields[Ec2Resource],
   shellCommandActivityFields: ShellCommandActivityFields,
-  jarUri: HString,
-  mainClass: HString,
-  topicArn: HString,
-  message: HString,
-  subject: Option[HString],
-  region: Option[HString],
-  structuredMessage: HBoolean,
-  attributes: Map[HString, (HString, HString)]
+  jarUri:                     HString,
+  mainClass:                  HString,
+  topicArn:                   HString,
+  message:                    HString,
+  subject:                    Option[HString],
+  region:                     Option[HString],
+  structuredMessage:          HBoolean,
+  attributes:                 Map[HString, (HString, HString)]
 ) extends BaseShellCommandActivity {
 
   type Self = SendSnsMessageActivity
@@ -37,7 +37,7 @@ case class SendSnsMessageActivity private (
   private def arguments: Seq[HString] = Seq(
     Option(Seq[HString]("--topic-arn", topicArn)),
     region.map(Seq[HString]("--region", _)),
-    if (attributes.nonEmpty) Option(Seq[HString]("--attributes", attributes.toSeq.map { case (k, (t, v)) => s"$k:$t=$v"}.mkString(","))) else None,
+    if (attributes.nonEmpty) Option(Seq[HString]("--attributes", attributes.toSeq.map { case (k, (t, v)) => s"$k:$t=$v" }.mkString(","))) else None,
     subject.map(Seq[HString]("--subject", _)),
     structuredMessage.exists(Seq[HString]("--json")),
     Option(Seq[HString]("--message", message))

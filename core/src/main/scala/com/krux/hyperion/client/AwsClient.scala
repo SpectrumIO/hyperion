@@ -1,15 +1,14 @@
 package com.krux.hyperion.client
 
-import com.amazonaws.auth.{DefaultAWSCredentialsProviderChain, STSAssumeRoleSessionCredentialsProvider}
+import com.amazonaws.auth.{ DefaultAWSCredentialsProviderChain, STSAssumeRoleSessionCredentialsProvider }
 import com.amazonaws.regions.Regions
-import com.amazonaws.services.datapipeline.{DataPipelineClientBuilder, DataPipeline}
+import com.amazonaws.services.datapipeline.{ DataPipelineClientBuilder, DataPipeline }
 import com.amazonaws.services.securitytoken.AWSSecurityTokenServiceClientBuilder
 import org.slf4j.LoggerFactory
 
 import com.krux.hyperion.DataPipelineDefGroup
 import com.krux.stubborn.policy.ExponentialBackoffAndJitter
 import com.krux.stubborn.Retryable
-
 
 trait AwsClient extends Retryable with ExponentialBackoffAndJitter {
 
@@ -51,10 +50,10 @@ object AwsClient {
   }
 
   def apply(
-      pipelineDef: DataPipelineDefGroup,
-      regionId: Option[String],
-      roleArn: Option[String]
-    ): AwsClientForDef =
+    pipelineDef: DataPipelineDefGroup,
+    regionId:    Option[String],
+    roleArn:     Option[String]
+  ): AwsClientForDef =
     new AwsClientForDef(getClient(regionId, roleArn), pipelineDef)
 
 }

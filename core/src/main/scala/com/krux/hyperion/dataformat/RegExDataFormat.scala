@@ -8,10 +8,10 @@ import com.krux.hyperion.common.{ BaseFields, PipelineObjectId }
  * A custom data format defined by a regular expression.
  */
 case class RegExDataFormat private (
-  baseFields: BaseFields,
+  baseFields:       BaseFields,
   dataFormatFields: DataFormatFields,
-  inputRegEx: HString,
-  outputFormat: HString
+  inputRegEx:       HString,
+  outputFormat:     HString
 ) extends DataFormat {
 
   type Self = RegExDataFormat

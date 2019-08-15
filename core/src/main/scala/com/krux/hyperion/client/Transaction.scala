@@ -1,6 +1,5 @@
 package com.krux.hyperion.client
 
-
 trait Transaction[F, S] {
 
   def action(): S

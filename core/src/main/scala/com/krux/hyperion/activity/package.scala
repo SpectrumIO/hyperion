@@ -3,7 +3,6 @@ package com.krux.hyperion
 import com.krux.hyperion.common.S3Uri
 import com.krux.hyperion.common.S3Uri._
 
-
 package object activity {
 
   final val EmrScriptRunner: S3Uri =

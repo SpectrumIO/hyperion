@@ -1,8 +1,12 @@
 package com.krux.hyperion.action
 
 import com.krux.hyperion.adt.HString
-import com.krux.hyperion.common.{ PipelineObjectId, NamedPipelineObject, PipelineObject,
-  BaseFields }
+import com.krux.hyperion.common.{
+  PipelineObjectId,
+  NamedPipelineObject,
+  PipelineObject,
+  BaseFields
+}
 import com.krux.hyperion.aws.{ AdpSnsAlarm, AdpRef }
 import com.krux.hyperion.expression.RuntimeNode
 import com.krux.hyperion.HyperionContext
@@ -12,10 +16,10 @@ import com.krux.hyperion.HyperionContext
  */
 case class SnsAlarm private (
   baseFields: BaseFields,
-  subject: HString,
-  message: HString,
-  role: HString,
-  topicArn: HString
+  subject:    HString,
+  message:    HString,
+  role:       HString,
+  topicArn:   HString
 ) extends Action with NamedPipelineObject {
 
   type Self = SnsAlarm
@@ -61,6 +65,5 @@ object SnsAlarm {
     topicArn = topicArn,
     role = hc.snsRole.get
   )
-
 
 }

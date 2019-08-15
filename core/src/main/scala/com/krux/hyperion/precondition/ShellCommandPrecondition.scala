@@ -16,12 +16,12 @@ import com.krux.hyperion.HyperionContext
  *
  */
 case class ShellCommandPrecondition private (
-  baseFields: BaseFields,
+  baseFields:         BaseFields,
   preconditionFields: PreconditionFields,
-  script: Script,
-  scriptArgument: Seq[HString],
-  stdout: Option[HString],
-  stderr: Option[HString]
+  script:             Script,
+  scriptArgument:     Seq[HString],
+  stdout:             Option[HString],
+  stderr:             Option[HString]
 ) extends Precondition {
 
   type Self = ShellCommandPrecondition

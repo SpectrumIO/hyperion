@@ -2,17 +2,17 @@ package com.krux.hyperion.adt
 
 import scala.language.implicitConversions
 
-import org.joda.time.{DateTimeZone, DateTime}
+import org.joda.time.{ DateTimeZone, DateTime }
 
 import com.krux.hyperion.expression._
-import com.krux.hyperion.common.{HdfsUri, S3Uri, OptionalOrdered}
+import com.krux.hyperion.common.{ HdfsUri, S3Uri, OptionalOrdered }
 
 sealed abstract class HType {
 
   def value: Either[Any, TypedExpression]
 
   lazy val serialize: String = value match {
-    case Left(v) => v.toString
+    case Left(v)  => v.toString
     case Right(r) => r.serialize
   }
 
@@ -59,7 +59,7 @@ case class HInt(value: Either[Int, IntExp]) extends HType with OptionalOrdered[I
 
   def isZero: Option[Boolean] = value match {
     case Left(v) => Option(v == 0)
-    case _ => None
+    case _       => None
   }
 
   def compare(that: Int): Option[Int] = value match {
@@ -67,17 +67,17 @@ case class HInt(value: Either[Int, IntExp]) extends HType with OptionalOrdered[I
     case Right(v) =>
       v match {
         case x: Evaluatable[_] => Some(x.evaluate().asInstanceOf[Int] - that)
-        case _ => None
+        case _                 => None
       }
   }
 
-  def + (that: HInt): HInt = this.value match {
+  def +(that: HInt): HInt = this.value match {
     case Left(i) => that.value match {
-      case Left(j) => HInt(Left(i + j))
+      case Left(j)  => HInt(Left(i + j))
       case Right(j) => HInt(Right(IntConstantExp(i) + j))
     }
     case Right(i) => that.value match {
-      case Left(j) => HInt(Right(i + IntConstantExp(j)))
+      case Left(j)  => HInt(Right(i + IntConstantExp(j)))
       case Right(j) => HInt(Right(i + j))
     }
   }
@@ -117,7 +117,7 @@ case class HDouble(value: Either[Double, DoubleExp]) extends HType with Optional
 case class HBoolean(value: Either[Boolean, BooleanExp]) extends HType {
   def exists[B](fn: => B) = value match {
     case Left(true) => Option(fn)
-    case _ => None
+    case _          => None
   }
 }
 
@@ -126,7 +126,7 @@ object HBoolean {
   final val False = HBoolean(Left(false))
 
   implicit def hboolean2Boolean(b: HBoolean): Boolean = b.value match {
-    case Left(v) => v
+    case Left(v)  => v
     case Right(v) => v.evaluate()
   }
 }
@@ -136,7 +136,7 @@ case class HDateTime(value: Either[DateTime, DateTimeExp]) extends HType {
   val datetimeFormat = "yyyy-MM-dd'T'HH:mm:ss"
 
   override lazy val serialize: String = value match {
-    case Left(dt) => dt.toDateTime(DateTimeZone.UTC).toString(datetimeFormat)
+    case Left(dt)    => dt.toDateTime(DateTimeZone.UTC).toString(datetimeFormat)
     case Right(expr) => expr.toString
   }
 
@@ -145,7 +145,7 @@ case class HDateTime(value: Either[DateTime, DateTimeExp]) extends HType {
 object HDateTime {
 
   implicit def hDateTime2DateTimeExp(dt: HDateTime): DateTimeExp = dt.value match {
-    case Left(x) => DateTimeConstantExp(x)
+    case Left(x)  => DateTimeConstantExp(x)
     case Right(x) => x
   }
 

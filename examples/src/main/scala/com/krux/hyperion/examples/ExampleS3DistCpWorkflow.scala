@@ -8,8 +8,7 @@ import com.krux.hyperion.common.HdfsUri
 import com.krux.hyperion.expression.Parameter
 import com.krux.hyperion.Implicits._
 import com.krux.hyperion.resource.EmrCluster
-import com.krux.hyperion.{DataPipelineDef, HyperionCli, HyperionContext, Schedule}
-
+import com.krux.hyperion.{ DataPipelineDef, HyperionCli, HyperionContext, Schedule }
 
 object ExampleS3DistCpWorkflow extends DataPipelineDef with HyperionCli {
 

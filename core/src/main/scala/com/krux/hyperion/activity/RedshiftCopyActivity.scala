@@ -13,14 +13,14 @@ import com.krux.hyperion.resource.{ Resource, Ec2Resource }
  * table, or easily merge data into an existing table.
  */
 case class RedshiftCopyActivity private (
-  baseFields: BaseFields,
+  baseFields:     BaseFields,
   activityFields: ActivityFields[Ec2Resource],
-  insertMode: RedshiftCopyActivity.InsertMode,
-  transformSql: Option[HString],
-  queue: Option[HString],
+  insertMode:     RedshiftCopyActivity.InsertMode,
+  transformSql:   Option[HString],
+  queue:          Option[HString],
   commandOptions: Seq[RedshiftCopyOption],
-  input: S3DataNode,
-  output: RedshiftDataNode
+  input:          S3DataNode,
+  output:         RedshiftDataNode
 ) extends PipelineActivity[Ec2Resource] {
 
   type Self = RedshiftCopyActivity
@@ -35,9 +35,8 @@ case class RedshiftCopyActivity private (
         .forall {
           case f: CsvDataFormat => false
           case f: TsvDataFormat => false
-          case _ => true
-        }
-      ,
+          case _                => true
+        },
       "CSV or TSV format cannot be used with commandOptions"
     )
 

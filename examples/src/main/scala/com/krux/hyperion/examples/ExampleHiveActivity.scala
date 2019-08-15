@@ -1,6 +1,6 @@
 package com.krux.hyperion.examples
 
-import com.krux.hyperion.{DataPipelineDef, HyperionCli, HyperionContext, Schedule}
+import com.krux.hyperion.{ DataPipelineDef, HyperionCli, HyperionContext, Schedule }
 import com.krux.hyperion.Implicits._
 import com.krux.hyperion.activity.HiveActivity
 import com.krux.hyperion.common.S3Uri
@@ -34,8 +34,7 @@ object ExampleHiveActivity extends DataPipelineDef with HyperionCli {
     .named("Cluster with release label")
 
   val hive = HiveActivity(List(dataNode, dataNode), List(dataNode), hiveScript =
-    s"""INSERT OVERWRITE TABLE $${output1} SELECT x.a FROM $${input1} x JOIN $${input2} y ON x.id = y.id;"""
-    )(emrCluster)
+    s"""INSERT OVERWRITE TABLE $${output1} SELECT x.a FROM $${input1} x JOIN $${input2} y ON x.id = y.id;""")(emrCluster)
 
   override def workflow = hive.toWorkflowExpression
 }

@@ -1,13 +1,12 @@
 package com.krux.hyperion.activity
 
-import com.krux.hyperion.adt.{HInt, HString, HS3Uri}
+import com.krux.hyperion.adt.{ HInt, HString, HS3Uri }
 import com.krux.hyperion.aws._
-import com.krux.hyperion.common.{Memory, PipelineObjectId, BaseFields}
+import com.krux.hyperion.common.{ Memory, PipelineObjectId, BaseFields }
 import com.krux.hyperion.datanode.S3DataNode
 import com.krux.hyperion.expression.RunnableObject
 import com.krux.hyperion.HyperionContext
-import com.krux.hyperion.resource.{BaseEmrCluster, EmrCluster, LegacyEmrCluster, Resource}
-
+import com.krux.hyperion.resource.{ BaseEmrCluster, EmrCluster, LegacyEmrCluster, Resource }
 
 /**
  * Runs a Spark job on a cluster. The cluster can be an EMR cluster managed by AWS Data Pipeline
@@ -17,19 +16,19 @@ import com.krux.hyperion.resource.{BaseEmrCluster, EmrCluster, LegacyEmrCluster,
  * you can still use SparkActivity.
  */
 case class SparkTaskActivity private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[BaseEmrCluster],
+  baseFields:            BaseFields,
+  activityFields:        ActivityFields[BaseEmrCluster],
   emrTaskActivityFields: EmrTaskActivityFields,
-  jarUri: HString,
-  sparkJarUri: HString,
-  command: HString,
-  sparkMainClass: Option[MainClass],
-  arguments: Seq[HString],
-  hadoopQueue: Option[HString],
-  inputs: Seq[S3DataNode],
-  outputs: Seq[S3DataNode],
-  sparkOptions: Seq[HString],
-  sparkConfig: Map[HString, HString]
+  jarUri:                HString,
+  sparkJarUri:           HString,
+  command:               HString,
+  sparkMainClass:        Option[MainClass],
+  arguments:             Seq[HString],
+  hadoopQueue:           Option[HString],
+  inputs:                Seq[S3DataNode],
+  outputs:               Seq[S3DataNode],
+  sparkOptions:          Seq[HString],
+  sparkConfig:           Map[HString, HString]
 ) extends EmrTaskActivity[BaseEmrCluster] {
 
   type Self = SparkTaskActivity

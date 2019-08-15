@@ -1,25 +1,24 @@
 package com.krux.hyperion.activity
 
-import com.krux.hyperion.adt.{HS3Uri, HString}
+import com.krux.hyperion.adt.{ HS3Uri, HString }
 import com.krux.hyperion.aws.AdpSqlActivity
-import com.krux.hyperion.common.{BaseFields, PipelineObjectId, Escapable}
+import com.krux.hyperion.common.{ BaseFields, PipelineObjectId, Escapable }
 import com.krux.hyperion.database.RedshiftDatabase
-import com.krux.hyperion.expression.{EncryptedParameter, RunnableObject}
-import com.krux.hyperion.resource.{Ec2Resource, Resource}
-
+import com.krux.hyperion.expression.{ EncryptedParameter, RunnableObject }
+import com.krux.hyperion.resource.{ Ec2Resource, Resource }
 
 /**
  * Unload result of the given sql script from redshift to given s3Path.
  */
 case class RedshiftUnloadActivity private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[Ec2Resource],
-  script: HString,
-  s3Path: HS3Uri,
-  database: RedshiftDatabase,
-  unloadOptions: Seq[RedshiftUnloadOption],
-  queue: Option[HString],
-  accessKeyId: EncryptedParameter[String],
+  baseFields:      BaseFields,
+  activityFields:  ActivityFields[Ec2Resource],
+  script:          HString,
+  s3Path:          HS3Uri,
+  database:        RedshiftDatabase,
+  unloadOptions:   Seq[RedshiftUnloadOption],
+  queue:           Option[HString],
+  accessKeyId:     EncryptedParameter[String],
   accessKeySecret: EncryptedParameter[String]
 ) extends PipelineActivity[Ec2Resource] {
 
@@ -70,7 +69,7 @@ case class RedshiftUnloadActivity private (
 object RedshiftUnloadActivity extends RunnableObject {
 
   def apply(database: RedshiftDatabase, script: HString, s3Path: HS3Uri,
-    accessKeyId: EncryptedParameter[String], accessKeySecret: EncryptedParameter[String])(runsOn: Resource[Ec2Resource]): RedshiftUnloadActivity =
+            accessKeyId: EncryptedParameter[String], accessKeySecret: EncryptedParameter[String])(runsOn: Resource[Ec2Resource]): RedshiftUnloadActivity =
     new RedshiftUnloadActivity(
       baseFields = BaseFields(PipelineObjectId(RedshiftUnloadActivity.getClass)),
       activityFields = ActivityFields(runsOn),

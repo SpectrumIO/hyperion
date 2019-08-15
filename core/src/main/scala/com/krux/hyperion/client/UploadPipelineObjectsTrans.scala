@@ -2,16 +2,15 @@ package com.krux.hyperion.client
 
 import scala.collection.JavaConverters._
 import com.amazonaws.services.datapipeline.DataPipeline
-import com.amazonaws.services.datapipeline.model.{CreatePipelineRequest, InvalidRequestException, ParameterObject, PipelineObject, PutPipelineDefinitionRequest, Tag}
-import org.slf4j.{Logger, LoggerFactory}
-import com.krux.hyperion.{DataPipelineDefGroup, WorkflowKey}
+import com.amazonaws.services.datapipeline.model.{ CreatePipelineRequest, InvalidRequestException, ParameterObject, PipelineObject, PutPipelineDefinitionRequest, Tag }
+import org.slf4j.{ Logger, LoggerFactory }
+import com.krux.hyperion.{ DataPipelineDefGroup, WorkflowKey }
 import com.krux.stubborn.Retryable
 import com.krux.stubborn.policy.ExponentialBackoffAndJitter
 
-
 case class UploadPipelineObjectsTrans(
-  client: DataPipeline,
-  pipelineDef: DataPipelineDefGroup,
+  client:                DataPipeline,
+  pipelineDef:           DataPipelineDefGroup,
   override val maxRetry: Int
 ) extends Transaction[Option[Unit], AwsClientForId] with Retryable with ExponentialBackoffAndJitter {
 
@@ -86,11 +85,11 @@ case class UploadPipelineObjectsTrans(
     AwsClientForId(
       client,
       keyObjectsMap
-        .toStream  // there is no need to keep perform createAndUploadObojects if one failed
+        .toStream // there is no need to keep perform createAndUploadObojects if one failed
         .map { case (key, objects) =>
-        log.info(s"Creating pipeline and uploading ${objects.size} objects")
-        createAndUploadObjects(pipelineDef.nameForKey(key), objects)
-      }
+          log.info(s"Creating pipeline and uploading ${objects.size} objects")
+          createAndUploadObjects(pipelineDef.nameForKey(key), objects)
+        }
         .takeWhile(_.nonEmpty)
         .flatten
         .toSet,

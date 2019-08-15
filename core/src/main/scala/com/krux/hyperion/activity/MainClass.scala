@@ -17,8 +17,8 @@ object MainClass {
   implicit def anyToMainClass(a: Any): MainClass = MainClass(a)
 
   def apply(mainClass: Any): MainClass = mainClass match {
-    case s: String => new MainClass(s.stripSuffix("$"))
+    case s: String   => new MainClass(s.stripSuffix("$"))
     case c: Class[_] => apply(c.getCanonicalName)
-    case mc => apply(mc.getClass)
+    case mc          => apply(mc.getClass)
   }
 }

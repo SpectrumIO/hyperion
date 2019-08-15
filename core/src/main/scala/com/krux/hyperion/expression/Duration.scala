@@ -57,17 +57,17 @@ object Duration {
   def apply(s: String): Duration = {
     s.trim.toLowerCase.split(' ').toList match {
       case amount :: unit :: Nil => unit match {
-        case "year"   | "years"   => Year(amount.toInt)
-        case "month"  | "months"  => Month(amount.toInt)
-        case "week"   | "weeks"   => Week(amount.toInt)
-        case "day"    | "days"    => Day(amount.toInt)
-        case "hour"   | "hours"   => Hour(amount.toInt)
+        case "year" | "years"     => Year(amount.toInt)
+        case "month" | "months"   => Month(amount.toInt)
+        case "week" | "weeks"     => Week(amount.toInt)
+        case "day" | "days"       => Day(amount.toInt)
+        case "hour" | "hours"     => Hour(amount.toInt)
         case "minute" | "minutes" => Minute(amount.toInt)
-        case _ => throw new NumberFormatException(s"Cannot parse $s as a time period - $unit is not recognized")
+        case _                    => throw new NumberFormatException(s"Cannot parse $s as a time period - $unit is not recognized")
       }
 
       case amount :: Nil => Hour(amount.toInt)
-      case _ => throw new NumberFormatException(s"Cannot parse $s as a time period")
+      case _             => throw new NumberFormatException(s"Cannot parse $s as a time period")
     }
   }
 }

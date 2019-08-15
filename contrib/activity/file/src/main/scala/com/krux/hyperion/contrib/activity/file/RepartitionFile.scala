@@ -12,8 +12,7 @@ object RepartitionFile {
   def applyDefaultTemporaryDirectory(options: Options): Options =
     options.copy(temporaryDirectory = options.temporaryDirectory
       .orElse(stringToOptionalFile(System.getenv("TMPDIR")))
-      .orElse(stringToOptionalFile("/tmp"))
-    )
+      .orElse(stringToOptionalFile("/tmp")))
 
   def applyDefaultNumberOfFilesCalculation(options: Options): Options =
     options.numberOfFiles.map { numberOfFiles =>
@@ -111,7 +110,8 @@ object RepartitionFile {
       note(
         """Repartitions a set of files into either a given number of files, lines per file or bytes per file.
           |Options including compressing the output and adding header to each file.
-        """.stripMargin)
+        """.stripMargin
+      )
 
       help("help").text("prints this usage text")
       opt[Unit]('z', "compressed").optional().action((_, c) => c.copy(compressed = true))

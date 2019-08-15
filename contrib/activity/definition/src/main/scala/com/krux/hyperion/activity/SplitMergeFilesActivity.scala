@@ -7,25 +7,25 @@ import com.krux.hyperion.expression.RunnableObject
 import com.krux.hyperion.resource.{ Ec2Resource, Resource }
 
 case class SplitMergeFilesActivity private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[Ec2Resource],
+  baseFields:                 BaseFields,
+  activityFields:             ActivityFields[Ec2Resource],
   shellCommandActivityFields: ShellCommandActivityFields,
-  jarUri: HString,
-  mainClass: HString,
-  filename: HString,
-  header: Option[HString],
-  compressedOutput: HBoolean,
-  skipFirstInputLine: HBoolean,
-  ignoreEmptyInput: HBoolean,
-  linkOutputs: HBoolean,
-  suffixLength: Option[HInt],
-  numberOfFiles: Option[HInt],
-  linesPerFile: Option[HLong],
-  bytesPerFile: Option[HString],
-  bufferSize: Option[HString],
-  pattern: Option[HString],
-  markSuccessfulJobs: HBoolean,
-  temporaryDirectory: Option[HString]
+  jarUri:                     HString,
+  mainClass:                  HString,
+  filename:                   HString,
+  header:                     Option[HString],
+  compressedOutput:           HBoolean,
+  skipFirstInputLine:         HBoolean,
+  ignoreEmptyInput:           HBoolean,
+  linkOutputs:                HBoolean,
+  suffixLength:               Option[HInt],
+  numberOfFiles:              Option[HInt],
+  linesPerFile:               Option[HLong],
+  bytesPerFile:               Option[HString],
+  bufferSize:                 Option[HString],
+  pattern:                    Option[HString],
+  markSuccessfulJobs:         HBoolean,
+  temporaryDirectory:         Option[HString]
 ) extends BaseShellCommandActivity with WithS3Input with WithS3Output {
 
   type Self = SplitMergeFilesActivity

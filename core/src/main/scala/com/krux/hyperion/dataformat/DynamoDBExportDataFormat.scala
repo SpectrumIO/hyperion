@@ -15,7 +15,7 @@ import com.krux.hyperion.common.{ BaseFields, PipelineObjectId }
  *   - Exports all attributes from DynamoDB even if you have a sparse schema
  */
 case class DynamoDBExportDataFormat private (
-  baseFields: BaseFields,
+  baseFields:       BaseFields,
   dataFormatFields: DataFormatFields
 ) extends DataFormat {
 

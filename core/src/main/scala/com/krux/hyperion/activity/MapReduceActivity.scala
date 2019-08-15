@@ -2,23 +2,22 @@ package com.krux.hyperion.activity
 
 import com.krux.hyperion.adt.HString
 import com.krux.hyperion.aws.AdpEmrActivity
-import com.krux.hyperion.common.{BaseFields, PipelineObjectId}
+import com.krux.hyperion.common.{ BaseFields, PipelineObjectId }
 import com.krux.hyperion.datanode.S3DataNode
 import com.krux.hyperion.expression.RunnableObject
-import com.krux.hyperion.resource.{Resource, BaseEmrCluster}
-
+import com.krux.hyperion.resource.{ Resource, BaseEmrCluster }
 
 /**
  * Runs map reduce steps on an Amazon EMR cluster
  */
 @deprecated("Use EmrActivity instead", "5.0.0")
 case class MapReduceActivity[A <: BaseEmrCluster] private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[A],
-  steps: Seq[MapReduceStep],
-  inputs: Seq[S3DataNode],
-  outputs: Seq[S3DataNode],
-  preStepCommands: Seq[HString],
+  baseFields:       BaseFields,
+  activityFields:   ActivityFields[A],
+  steps:            Seq[MapReduceStep],
+  inputs:           Seq[S3DataNode],
+  outputs:          Seq[S3DataNode],
+  preStepCommands:  Seq[HString],
   postStepCommands: Seq[HString]
 ) extends BaseEmrActivity[A] {
 

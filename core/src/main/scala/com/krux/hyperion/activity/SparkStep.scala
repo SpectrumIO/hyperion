@@ -1,9 +1,8 @@
 package com.krux.hyperion.activity
 
-import com.krux.hyperion.adt.{HString, HS3Uri, HInt}
-import com.krux.hyperion.common.{Escapable, Memory}
+import com.krux.hyperion.adt.{ HString, HS3Uri, HInt }
+import com.krux.hyperion.common.{ Escapable, Memory }
 import com.krux.hyperion.HyperionContext
-
 
 trait SparkStep extends BaseEmrStep {
 
@@ -32,14 +31,14 @@ trait SparkStep extends BaseEmrStep {
   def withMaster(master: HString) = withSparkOptions("--master", master)
 
   override lazy val serialize: String = (
-      jarUri.serialize +:
-      command.serialize +:
-      sparkOptions ++:
-      sparkConfigs.flatMap { case (k, v) => Seq("--conf", s"$k=$v") } ++:
-      sparkJarUri.serialize +:
-      sparkMainClass.map(_.toString) ++:
-      args
-    )
+    jarUri.serialize +:
+    command.serialize +:
+    sparkOptions ++:
+    sparkConfigs.flatMap { case (k, v) => Seq("--conf", s"$k=$v") } ++:
+    sparkJarUri.serialize +:
+    sparkMainClass.map(_.toString) ++:
+    args
+  )
     .map(x => Escapable.escape(x.toString, ',')).mkString(",")
 
 }
@@ -47,12 +46,12 @@ trait SparkStep extends BaseEmrStep {
 object SparkStep {
 
   case class ScriptRunnerStep(
-    sparkJarUri: HString,
-    command: HString,
+    sparkJarUri:    HString,
+    command:        HString,
     sparkMainClass: Option[MainClass],
-    sparkOptions: Seq[HString],
-    sparkConfigs: Map[HString, HString],
-    args: Seq[HString]
+    sparkOptions:   Seq[HString],
+    sparkConfigs:   Map[HString, HString],
+    args:           Seq[HString]
   ) extends SparkStep {
 
     def jarUri = EmrScriptRunner.toString
@@ -65,12 +64,12 @@ object SparkStep {
   }
 
   case class CommandRunnerStep(
-    sparkJarUri: HString,
-    command: HString,
+    sparkJarUri:    HString,
+    command:        HString,
     sparkMainClass: Option[MainClass],
-    sparkOptions: Seq[HString],
-    sparkConfigs: Map[HString, HString],
-    args: Seq[HString]
+    sparkOptions:   Seq[HString],
+    sparkConfigs:   Map[HString, HString],
+    args:           Seq[HString]
   ) extends SparkStep {
 
     def jarUri = EmrCommandRunner

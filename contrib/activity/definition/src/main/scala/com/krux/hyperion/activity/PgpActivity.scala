@@ -1,12 +1,12 @@
 package com.krux.hyperion.activity
 
 import com.krux.hyperion.HyperionContext
-import com.krux.hyperion.adt.{HBoolean, HS3Uri}
+import com.krux.hyperion.adt.{ HBoolean, HS3Uri }
 import com.krux.hyperion.common.S3Uri
 
 /**
-  * Base trait for server-side PGP encryption activities.
-  */
+ * Base trait for server-side PGP encryption activities.
+ */
 trait PgpActivity extends BaseShellCommandActivity with WithS3Input with WithS3Output {
   type Self <: PgpActivity
 

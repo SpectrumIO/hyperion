@@ -5,8 +5,8 @@ import com.krux.hyperion.aws.{ AdpProperty, AdpRef }
 import com.krux.hyperion.common.{ PipelineObject, PipelineObjectId }
 
 case class Property private (
-  id: PipelineObjectId,
-  key: Option[HString],
+  id:    PipelineObjectId,
+  key:   Option[HString],
   value: Option[HString]
 ) extends PipelineObject {
 

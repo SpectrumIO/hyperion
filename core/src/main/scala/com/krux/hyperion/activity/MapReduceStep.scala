@@ -1,6 +1,6 @@
 package com.krux.hyperion.activity
 
-import com.krux.hyperion.adt.{HString, HS3Uri}
+import com.krux.hyperion.adt.{ HString, HS3Uri }
 import com.krux.hyperion.common.Escapable
 
 /**
@@ -8,9 +8,9 @@ import com.krux.hyperion.common.Escapable
  */
 @deprecated("Use HadoopStep instead", "5.0.0")
 case class MapReduceStep private (
-  jarUri: HString,
+  jarUri:    HString,
   mainClass: Option[MainClass],
-  args: Seq[HString]
+  args:      Seq[HString]
 ) {
 
   def withMainClass(mainClass: MainClass) = copy(mainClass = Option(mainClass))

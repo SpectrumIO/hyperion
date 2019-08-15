@@ -1,21 +1,21 @@
 package com.krux.hyperion.activity
 
 import com.krux.hyperion.HyperionContext
-import com.krux.hyperion.adt.{HBoolean, HS3Uri, HString}
-import com.krux.hyperion.common.{BaseFields, PipelineObjectId}
+import com.krux.hyperion.adt.{ HBoolean, HS3Uri, HString }
+import com.krux.hyperion.common.{ BaseFields, PipelineObjectId }
 import com.krux.hyperion.expression.RunnableObject
-import com.krux.hyperion.resource.{Ec2Resource, Resource}
+import com.krux.hyperion.resource.{ Ec2Resource, Resource }
 
 /**
  * Google Storage Download activity
  */
 case class GoogleStorageDownloadActivity private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[Ec2Resource],
+  baseFields:                 BaseFields,
+  activityFields:             ActivityFields[Ec2Resource],
   shellCommandActivityFields: ShellCommandActivityFields,
-  botoConfigUrl: HS3Uri,
-  googleStorageUri: HString,
-  ignoreMissingSource: HBoolean
+  botoConfigUrl:              HS3Uri,
+  googleStorageUri:           HString,
+  ignoreMissingSource:        HBoolean
 ) extends GoogleStorageActivity with WithS3Output {
 
   type Self = GoogleStorageDownloadActivity

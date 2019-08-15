@@ -11,18 +11,18 @@ import scopt.OptionParser
 
 object SendEmailActivity {
   case class Options(
-    host: Option[String] = None,
-    port: Option[Int] = None,
+    host:     Option[String] = None,
+    port:     Option[Int]    = None,
     username: Option[String] = None,
     password: Option[String] = None,
-    from: Option[String] = None,
-    to: Seq[String] = Seq.empty,
-    cc: Seq[String] = Seq.empty,
-    bcc: Seq[String] = Seq.empty,
-    subject: Option[String] = None,
-    body: Option[String] = None,
-    starttls: Boolean = false,
-    debug: Boolean = false
+    from:     Option[String] = None,
+    to:       Seq[String]    = Seq.empty,
+    cc:       Seq[String]    = Seq.empty,
+    bcc:      Seq[String]    = Seq.empty,
+    subject:  Option[String] = None,
+    body:     Option[String] = None,
+    starttls: Boolean        = false,
+    debug:    Boolean        = false
   )
 
   def apply(options: Options): Boolean = {
@@ -61,19 +61,19 @@ object SendEmailActivity {
 
       // Add the primary recipients
       options.to match {
-        case Seq() =>
+        case Seq()      =>
         case recipients => message.setRecipients(RecipientType.TO, InternetAddress.parse(recipients.mkString(","), false).asInstanceOf[Array[Address]])
       }
 
       // Add the carbon copy recipients
       options.cc match {
-        case Seq() =>
+        case Seq()      =>
         case recipients => message.setRecipients(RecipientType.CC, InternetAddress.parse(recipients.mkString(","), false).asInstanceOf[Array[Address]])
       }
 
       // Add the blind carbon copy recipients
       options.bcc match {
-        case Seq() =>
+        case Seq()      =>
         case recipients => message.setRecipients(RecipientType.BCC, InternetAddress.parse(recipients.mkString(","), false).asInstanceOf[Array[Address]])
       }
 

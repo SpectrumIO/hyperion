@@ -9,7 +9,7 @@ import com.krux.hyperion.common.{ BaseFields, PipelineObjectId }
  * requires that you specify all columns in your Hive query.
  */
 case class DynamoDBDataFormat private (
-  baseFields: BaseFields,
+  baseFields:       BaseFields,
   dataFormatFields: DataFormatFields
 ) extends DataFormat {
 

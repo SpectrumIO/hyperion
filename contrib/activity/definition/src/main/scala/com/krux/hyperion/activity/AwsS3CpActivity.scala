@@ -1,21 +1,21 @@
 package com.krux.hyperion.activity
 
-import com.krux.hyperion.adt.{HBoolean, HS3Uri, HString}
-import com.krux.hyperion.common.{BaseFields, PipelineObjectId}
-import com.krux.hyperion.resource.{Ec2Resource, Resource}
+import com.krux.hyperion.adt.{ HBoolean, HS3Uri, HString }
+import com.krux.hyperion.common.{ BaseFields, PipelineObjectId }
+import com.krux.hyperion.resource.{ Ec2Resource, Resource }
 import com.krux.hyperion.expression.RunnableObject
 
-case class AwsS3CpActivity private(
-  baseFields: BaseFields,
-  activityFields: ActivityFields[Ec2Resource],
+case class AwsS3CpActivity private (
+  baseFields:                 BaseFields,
+  activityFields:             ActivityFields[Ec2Resource],
   shellCommandActivityFields: ShellCommandActivityFields,
-  sourceS3Path: HS3Uri,
-  destinationS3Path: HS3Uri,
-  isRecursive: HBoolean,
-  isOverwrite: HBoolean,
-  isSilentFailure: HBoolean,
-  additionalArguments: Seq[HString],
-  profile: Option[HString]
+  sourceS3Path:               HS3Uri,
+  destinationS3Path:          HS3Uri,
+  isRecursive:                HBoolean,
+  isOverwrite:                HBoolean,
+  isSilentFailure:            HBoolean,
+  additionalArguments:        Seq[HString],
+  profile:                    Option[HString]
 ) extends BaseShellCommandActivity with WithS3Input {
 
   type Self = AwsS3CpActivity
@@ -32,7 +32,8 @@ case class AwsS3CpActivity private(
   def withInclude(pattern: HString) = withAdditionalArguments("--include", pattern)
   def withSourceRegion(sourceRegion: HString) = withAdditionalArguments("--source-region", sourceRegion)
   def withDestinationRegion(destinationRegion: HString) = withAdditionalArguments("--region", destinationRegion)
-  def withGrant(permission: HString, granteeTypeAndId: Seq[(String, String)]) = withAdditionalArguments("--grants",
+  def withGrant(permission: HString, granteeTypeAndId: Seq[(String, String)]) = withAdditionalArguments(
+    "--grants",
     granteeTypeAndId.map { case (grantType, id) => s"$grantType=$id" }.mkString(s"$permission=", ",", "")
   )
   def withAdditionalArguments(arguments: HString*) = copy(additionalArguments = this.additionalArguments ++ arguments)
@@ -41,14 +42,14 @@ case class AwsS3CpActivity private(
   private val removeScript = isOverwrite match {
     case HBoolean.True => profile match {
       case Some(p) => s"aws s3 rm --recursive --profile $p $destinationS3Path;"
-      case None => s"aws s3 rm --recursive $destinationS3Path;"
+      case None    => s"aws s3 rm --recursive $destinationS3Path;"
     }
     case _ => ""
   }
 
   private val s3CpScript = profile match {
-      case Some(p) => s"aws s3 cp ${additionalArguments.mkString(" ")} --profile $p $sourceS3Path $destinationS3Path;"
-      case None  => s"aws s3 cp ${additionalArguments.mkString(" ")} $sourceS3Path $destinationS3Path;"
+    case Some(p) => s"aws s3 cp ${additionalArguments.mkString(" ")} --profile $p $sourceS3Path $destinationS3Path;"
+    case None    => s"aws s3 cp ${additionalArguments.mkString(" ")} $sourceS3Path $destinationS3Path;"
   }
 
   private val silentFailureScript = if (isSilentFailure) "exit 0;" else ""
@@ -68,7 +69,7 @@ case class AwsS3CpActivity private(
 object AwsS3CpActivity extends RunnableObject {
 
   def apply(
-    sourceS3Path: HS3Uri,
+    sourceS3Path:      HS3Uri,
     destinationS3Path: HS3Uri
   )(runsOn: Resource[Ec2Resource]): AwsS3CpActivity =
     new AwsS3CpActivity(

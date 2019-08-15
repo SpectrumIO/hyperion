@@ -4,9 +4,8 @@ import com.amazonaws.services.datapipeline.DataPipeline
 
 import com.krux.hyperion.DataPipelineDefGroup
 
-
 case class AwsClientForDef(
-  client: DataPipeline,
+  client:      DataPipeline,
   pipelineDef: DataPipelineDefGroup
 ) extends AwsClient {
 

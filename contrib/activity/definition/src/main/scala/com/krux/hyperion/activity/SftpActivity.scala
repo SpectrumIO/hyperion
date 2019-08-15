@@ -1,19 +1,19 @@
 package com.krux.hyperion.activity
 
 import com.krux.hyperion.adt._
-import com.krux.hyperion.expression.{EncryptedParameter, Format}
+import com.krux.hyperion.expression.{ EncryptedParameter, Format }
 
 case class SftpActivityFields(
-  host: HString,
-  port: Option[HInt] = None,
-  username: Option[HString] = None,
-  password: Option[EncryptedParameter[String]] = None,
-  identity: Option[HS3Uri] = None,
-  pattern: Option[HString] = None,
-  sinceDate: Option[HDateTime] = None,
-  untilDate: Option[HDateTime] = None,
-  skipEmpty: HBoolean = false,
-  markSuccessfulJobs: HBoolean = false
+  host:               HString,
+  port:               Option[HInt]                       = None,
+  username:           Option[HString]                    = None,
+  password:           Option[EncryptedParameter[String]] = None,
+  identity:           Option[HS3Uri]                     = None,
+  pattern:            Option[HString]                    = None,
+  sinceDate:          Option[HDateTime]                  = None,
+  untilDate:          Option[HDateTime]                  = None,
+  skipEmpty:          HBoolean                           = false,
+  markSuccessfulJobs: HBoolean                           = false
 )
 
 trait SftpActivity extends BaseShellCommandActivity {

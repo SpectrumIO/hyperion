@@ -41,8 +41,8 @@ case class MakeDate(theYear: IntExp, theMonth: IntExp, theDay: IntExp) extends F
  * Example: #{makeDateTime(2011,5,24,14,21)}
  */
 case class MakeDateTime(
-    theYear: IntExp, theMonth: IntExp, theDay: IntExp, theHour: IntExp, theMinute: IntExp
-  ) extends FunctionExpression with DateTimeExp {
+  theYear: IntExp, theMonth: IntExp, theDay: IntExp, theHour: IntExp, theMinute: IntExp
+) extends FunctionExpression with DateTimeExp {
 
   def name = "makeDateTime"
 
@@ -132,7 +132,6 @@ case class FirstOfMonth(myDateTime: DateTimeExp) extends FunctionExpression with
 
 }
 
-
 /**
  * Creates a DateTime object for the next midnight, relative to the specified DateTime.
  * Example: #{midnight(myDateTime)}
@@ -144,7 +143,6 @@ case class Midnight(myDateTime: DateTimeExp) extends FunctionExpression with Dat
   def args = Seq(myDateTime)
 
 }
-
 
 /**
  * Creates a DateTime object for the previous Sunday, relative to the specified DateTime.
@@ -158,7 +156,6 @@ case class Sunday(myDateTime: DateTimeExp) extends FunctionExpression with DateT
   def args = Seq(myDateTime)
 
 }
-
 
 /**
  * Creates a DateTime object for the previous day, relative to the specified DateTime.

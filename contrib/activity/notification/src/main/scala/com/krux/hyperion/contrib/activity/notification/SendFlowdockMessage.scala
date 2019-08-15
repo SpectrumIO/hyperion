@@ -8,11 +8,11 @@ import scopt.OptionParser
 
 object SendFlowdockMessage {
   case class Options(
-    failOnError: Boolean = false,
-    apiKey: String = "",
-    message: String = "",
-    user: String = "hyperion",
-    tags: Seq[String] = Seq.empty
+    failOnError: Boolean     = false,
+    apiKey:      String      = "",
+    message:     String      = "",
+    user:        String      = "hyperion",
+    tags:        Seq[String] = Seq.empty
   )
 
   def apply(options: Options): Boolean = try {

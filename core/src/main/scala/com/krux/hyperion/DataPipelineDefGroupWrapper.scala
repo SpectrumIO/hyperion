@@ -1,18 +1,17 @@
 package com.krux.hyperion
 
-import com.krux.hyperion.expression.{Duration, Parameter}
+import com.krux.hyperion.expression.{ Duration, Parameter }
 import com.krux.hyperion.workflow.WorkflowExpression
 
-
 case class DataPipelineDefGroupWrapper private (
-  override val hc: HyperionContext,
-  override val pipelineName: String,
+  override val hc:               HyperionContext,
+  override val pipelineName:     String,
   override val nameKeySeparator: String,
-  schedule: Schedule,
-  override val scheduleDelay: Option[Duration],
-  workflowsFunc: () => Map[WorkflowKey, WorkflowExpression],  // for delayed workfow execution
-  override val tags: Map[String, Option[String]],
-  override val parameters: Iterable[Parameter[_]]
+  schedule:                      Schedule,
+  override val scheduleDelay:    Option[Duration],
+  workflowsFunc:                 () => Map[WorkflowKey, WorkflowExpression], // for delayed workfow execution
+  override val tags:             Map[String, Option[String]],
+  override val parameters:       Iterable[Parameter[_]]
 ) extends DataPipelineDefGroup {
 
   def withName(name: String) = copy(pipelineName = name)

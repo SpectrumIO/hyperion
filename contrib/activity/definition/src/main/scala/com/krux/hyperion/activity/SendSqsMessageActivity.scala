@@ -1,22 +1,22 @@
 package com.krux.hyperion.activity
 
-import com.krux.hyperion.adt.{HInt, HString, HType}
-import com.krux.hyperion.common.{BaseFields, PipelineObjectId, S3Uri}
+import com.krux.hyperion.adt.{ HInt, HString, HType }
+import com.krux.hyperion.common.{ BaseFields, PipelineObjectId, S3Uri }
 import com.krux.hyperion.expression.RunnableObject
 import com.krux.hyperion.HyperionContext
-import com.krux.hyperion.resource.{Ec2Resource, Resource}
+import com.krux.hyperion.resource.{ Ec2Resource, Resource }
 
 case class SendSqsMessageActivity private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[Ec2Resource],
+  baseFields:                 BaseFields,
+  activityFields:             ActivityFields[Ec2Resource],
   shellCommandActivityFields: ShellCommandActivityFields,
-  jarUri: HString,
-  mainClass: HString,
-  queue: HString,
-  message: HString,
-  region: Option[HString],
-  delay: Option[HInt],
-  attributes: Map[HString, (HString, HString)]
+  jarUri:                     HString,
+  mainClass:                  HString,
+  queue:                      HString,
+  message:                    HString,
+  region:                     Option[HString],
+  delay:                      Option[HInt],
+  attributes:                 Map[HString, (HString, HString)]
 ) extends BaseShellCommandActivity {
 
   type Self = SendSqsMessageActivity
@@ -35,7 +35,7 @@ case class SendSqsMessageActivity private (
   private def arguments: Seq[HType] = Seq(
     Option(Seq[HString]("--queue", queue)),
     region.map(Seq[HString]("--region", _)),
-    if (attributes.nonEmpty) Option(Seq[HString]("--attributes", attributes.toSeq.map { case (k, (t, v)) => s"$k:$t=$v"}.mkString(","))) else None,
+    if (attributes.nonEmpty) Option(Seq[HString]("--attributes", attributes.toSeq.map { case (k, (t, v)) => s"$k:$t=$v" }.mkString(","))) else None,
     delay.map(d => Seq[HType]("--delay", d)),
     Option(Seq[HString]("--message", message))
   ).flatten.flatten
@@ -46,8 +46,10 @@ case class SendSqsMessageActivity private (
 
 object SendSqsMessageActivity extends RunnableObject {
 
-  def apply(queue: String,
-    message: String)(runsOn: Resource[Ec2Resource])(implicit hc: HyperionContext): SendSqsMessageActivity =
+  def apply(
+    queue:   String,
+    message: String
+  )(runsOn: Resource[Ec2Resource])(implicit hc: HyperionContext): SendSqsMessageActivity =
     new SendSqsMessageActivity(
       baseFields = BaseFields(PipelineObjectId(SendSqsMessageActivity.getClass)),
       activityFields = ActivityFields(runsOn),

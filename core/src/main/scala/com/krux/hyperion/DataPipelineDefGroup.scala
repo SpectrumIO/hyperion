@@ -1,16 +1,15 @@
 package com.krux.hyperion
 
-import com.amazonaws.services.datapipeline.model.{ParameterObject => AwsParameterObject, PipelineObject => AwsPipelineObject}
+import com.amazonaws.services.datapipeline.model.{ ParameterObject => AwsParameterObject, PipelineObject => AwsPipelineObject }
 import org.json4s.JsonAST.JArray
 import org.json4s.JsonDSL._
 import org.json4s.JValue
 
 import com.krux.hyperion.activity.MainClass
-import com.krux.hyperion.aws.{AdpJsonSerializer, AdpParameterSerializer, AdpPipelineSerializer}
-import com.krux.hyperion.common.{DefaultObject, HdfsUriHelper, PipelineObject, S3UriHelper}
-import com.krux.hyperion.expression.{Parameter, ParameterValues, Duration}
-import com.krux.hyperion.workflow.{WorkflowExpression, WorkflowExpressionImplicits}
-
+import com.krux.hyperion.aws.{ AdpJsonSerializer, AdpParameterSerializer, AdpPipelineSerializer }
+import com.krux.hyperion.common.{ DefaultObject, HdfsUriHelper, PipelineObject, S3UriHelper }
+import com.krux.hyperion.expression.{ Parameter, ParameterValues, Duration }
+import com.krux.hyperion.workflow.{ WorkflowExpression, WorkflowExpressionImplicits }
 
 trait DataPipelineDefGroup
   extends S3UriHelper
@@ -63,7 +62,7 @@ object DataPipelineDefGroup {
 
   private def delayedSchedule(dpdg: DataPipelineDefGroup, multiplier: Int): Schedule = {
     dpdg.scheduleDelay match {
-      case None => dpdg.schedule
+      case None        => dpdg.schedule
       case Some(delay) => Schedule.delay(dpdg.schedule, delay, multiplier)
     }
   }
@@ -72,7 +71,7 @@ object DataPipelineDefGroup {
     def ungroup(): Map[WorkflowKey, DataPipelineDef] = {
       dpdg.workflows
         .toSeq
-        .sortBy(_._1)  // order by key
+        .sortBy(_._1) // order by key
         .zipWithIndex
         .map { case ((key, workflow), idx) =>
           (
@@ -112,7 +111,7 @@ object DataPipelineDefGroup {
 
     def toJson: JValue = {
       ("objects" -> JArray(objects.values.flatten.map(_.serialize).toList.sortBy(_.id).map(AdpJsonSerializer(_)))) ~
-      ("parameters" -> JArray(dpdg.parameters.flatMap(_.serialize).map(o => AdpJsonSerializer(o)).toList))
+        ("parameters" -> JArray(dpdg.parameters.flatMap(_.serialize).map(o => AdpJsonSerializer(o)).toList))
     }
 
   }

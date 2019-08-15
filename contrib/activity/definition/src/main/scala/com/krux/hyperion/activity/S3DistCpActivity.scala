@@ -7,37 +7,36 @@ import com.krux.hyperion.datanode.S3DataNode
 import com.krux.hyperion.expression.RunnableObject
 import com.krux.hyperion.resource._
 
-
 case class S3DistCpActivityFields(
-  source: Option[HString],
-  dest: Option[HString],
-  sourcePattern: Option[HString],
-  groupBy: Option[HString],
-  targetSize: Option[HInt],
-  appendLastToFile: HBoolean,
-  outputCodec: S3DistCpActivity.OutputCodec,
-  s3ServerSideEncryption: HBoolean,
-  deleteOnSuccess: HBoolean,
-  disableMultipartUpload: HBoolean,
-  chunkSize: Option[HInt],
-  numberFiles: HBoolean,
-  startingIndex: Option[HInt],
-  outputManifest: Option[HString],
-  previousManifest: Option[HString],
+  source:                  Option[HString],
+  dest:                    Option[HString],
+  sourcePattern:           Option[HString],
+  groupBy:                 Option[HString],
+  targetSize:              Option[HInt],
+  appendLastToFile:        HBoolean,
+  outputCodec:             S3DistCpActivity.OutputCodec,
+  s3ServerSideEncryption:  HBoolean,
+  deleteOnSuccess:         HBoolean,
+  disableMultipartUpload:  HBoolean,
+  chunkSize:               Option[HInt],
+  numberFiles:             HBoolean,
+  startingIndex:           Option[HInt],
+  outputManifest:          Option[HString],
+  previousManifest:        Option[HString],
   requirePreviousManifest: HBoolean,
-  copyFromManifest: HBoolean,
-  endpoint: Option[HString],
-  storageClass: Option[StorageClass],
-  sourcePrefixesFile: Option[HString]
+  copyFromManifest:        HBoolean,
+  endpoint:                Option[HString],
+  storageClass:            Option[StorageClass],
+  sourcePrefixesFile:      Option[HString]
 )
 
 case class S3DistCpActivity[A <: BaseEmrCluster] private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[A],
+  baseFields:             BaseFields,
+  activityFields:         ActivityFields[A],
   s3DistCpActivityFields: S3DistCpActivityFields,
-  preStepCommands: Seq[HString],
-  postStepCommands: Seq[HString],
-  arguments: Seq[HString]
+  preStepCommands:        Seq[HString],
+  postStepCommands:       Seq[HString],
+  arguments:              Seq[HString]
 ) extends BaseEmrActivity[A] {
 
   type Self = S3DistCpActivity[A]

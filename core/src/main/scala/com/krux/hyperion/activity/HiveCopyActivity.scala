@@ -1,13 +1,12 @@
 package com.krux.hyperion.activity
 
-import com.krux.hyperion.adt.{HString, HS3Uri}
+import com.krux.hyperion.adt.{ HString, HS3Uri }
 import com.krux.hyperion.aws.AdpHiveCopyActivity
 import com.krux.hyperion.common.BaseFields
 import com.krux.hyperion.common.PipelineObjectId
 import com.krux.hyperion.datanode.DataNode
 import com.krux.hyperion.expression.RunnableObject
-import com.krux.hyperion.resource.{Resource, BaseEmrCluster}
-
+import com.krux.hyperion.resource.{ Resource, BaseEmrCluster }
 
 /**
  * Runs a Hive query on an Amazon EMR cluster. HiveCopyActivity makes it easier to copy data between
@@ -15,13 +14,13 @@ import com.krux.hyperion.resource.{Resource, BaseEmrCluster}
  * Amazon S3 or DynomoDB at the column and row level.
  */
 case class HiveCopyActivity[A <: BaseEmrCluster] private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[A],
+  baseFields:            BaseFields,
+  activityFields:        ActivityFields[A],
   emrTaskActivityFields: EmrTaskActivityFields,
-  filterSql: Option[HString],
-  generatedScriptsPath: Option[HS3Uri],
-  input: DataNode,
-  output: DataNode
+  filterSql:             Option[HString],
+  generatedScriptsPath:  Option[HS3Uri],
+  input:                 DataNode,
+  output:                DataNode
 ) extends EmrTaskActivity[A] {
 
   type Self = HiveCopyActivity[A]

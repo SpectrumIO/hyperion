@@ -18,7 +18,7 @@ trait NamedPipelineObject extends PipelineObject {
    * Give the object a name prefix
    */
   def named(namePrefix: String) = updateBaseFields(
-    baseFields.copy(name = baseFields.name.map(namePrefix + "_" + _ ).orElse(Option(namePrefix)))
+    baseFields.copy(name = baseFields.name.map(namePrefix + "_" + _).orElse(Option(namePrefix)))
   )
 
   /**

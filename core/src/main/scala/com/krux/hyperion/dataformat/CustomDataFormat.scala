@@ -9,10 +9,10 @@ import com.krux.hyperion.common.{ BaseFields, PipelineObjectId }
  * and escape character.
  */
 case class CustomDataFormat private (
-  baseFields: BaseFields,
+  baseFields:       BaseFields,
   dataFormatFields: DataFormatFields,
-  columnSeparator: HString,
-  recordSeparator: HString
+  columnSeparator:  HString,
+  recordSeparator:  HString
 ) extends DataFormat {
 
   type Self = CustomDataFormat

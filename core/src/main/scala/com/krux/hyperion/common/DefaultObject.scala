@@ -1,8 +1,8 @@
 package com.krux.hyperion.common
 
-import com.krux.hyperion.adt.{HString, HType}
-import com.krux.hyperion.aws.{AdpDataPipelineAbstractObject, AdpDataPipelineDefaultObject, AdpRef}
-import com.krux.hyperion.{HyperionContext, OnDemandSchedule, Schedule}
+import com.krux.hyperion.adt.{ HString, HType }
+import com.krux.hyperion.aws.{ AdpDataPipelineAbstractObject, AdpDataPipelineDefaultObject, AdpRef }
+import com.krux.hyperion.{ HyperionContext, OnDemandSchedule, Schedule }
 
 /**
  * Fields used by the DefaultObjects.
@@ -10,8 +10,8 @@ import com.krux.hyperion.{HyperionContext, OnDemandSchedule, Schedule}
  * @param schedule The pipeline schedule.
  * @param properties Additional custom properties to attach to the default object.
  */
-case class DefaultObjectFields (
-  schedule: Schedule,
+case class DefaultObjectFields(
+  schedule:   Schedule,
   properties: Map[String, Either[HType, PipelineObject]]
 )
 
@@ -34,7 +34,7 @@ trait DefaultObject extends PipelineObject {
   def objects: Iterable[PipelineObject] = defaultObjectFields.schedule match {
     case OnDemandSchedule => None
 
-    case s => Option(s)
+    case s                => Option(s)
   }
 
   lazy val serialize = new AdpDataPipelineDefaultObject {
@@ -51,7 +51,7 @@ trait DefaultObject extends PipelineObject {
 
     val fields: Map[String, Either[String, AdpRef[AdpDataPipelineAbstractObject]]] = (defaultObjectFields.properties ++ scheduleProps).mapValues {
       case Right(p) => Right(p.ref)
-      case Left(s) => Left(s.serialize)
+      case Left(s)  => Left(s.serialize)
     }
   }
 
@@ -75,8 +75,10 @@ case class StandardDefaultObject private[hyperion] (
 
 object DefaultObject {
 
-  def apply(schedule: Schedule,
-    properties: Map[String, Either[HType, PipelineObject]] = Map.empty)(implicit hc: HyperionContext): DefaultObject = {
+  def apply(
+    schedule:   Schedule,
+    properties: Map[String, Either[HType, PipelineObject]] = Map.empty
+  )(implicit hc: HyperionContext): DefaultObject = {
 
     val props: Map[String, Either[HType, PipelineObject]] = Map(
       "failureAndRerunMode" -> Left(hc.failureRerunMode: HString),

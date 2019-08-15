@@ -4,16 +4,16 @@ import scala.collection.JavaConverters._
 
 import com.amazonaws.regions.Regions
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder
-import com.amazonaws.services.sqs.model.{MessageAttributeValue, SendMessageRequest}
+import com.amazonaws.services.sqs.model.{ MessageAttributeValue, SendMessageRequest }
 import scopt.OptionParser
 
 object SendSqsMessage {
   case class Options(
-    region: Option[String] = None,
-    queueUrl: Option[String] = None,
-    message: Option[String] = None,
-    delaySeconds: Option[Int] = Option(0),
-    attributes: Map[String, String] = Map.empty
+    region:       Option[String]      = None,
+    queueUrl:     Option[String]      = None,
+    message:      Option[String]      = None,
+    delaySeconds: Option[Int]         = Option(0),
+    attributes:   Map[String, String] = Map.empty
   )
 
   def apply(options: Options): Boolean = try {
@@ -34,9 +34,9 @@ object SendSqsMessage {
     if (options.attributes.nonEmpty) {
       request.setMessageAttributes(options.attributes.flatMap { case (k, v) =>
         k.split(":").toList match {
-          case key :: dataType :: Nil => Option(key -> new MessageAttributeValue().withStringValue(v).withDataType(dataType))
-          case key :: Nil => Option(key -> new MessageAttributeValue().withStringValue(v).withDataType("String"))
-          case _ => None
+          case key :: dataType :: Nil   => Option(key -> new MessageAttributeValue().withStringValue(v).withDataType(dataType))
+          case key :: Nil               => Option(key -> new MessageAttributeValue().withStringValue(v).withDataType("String"))
+          case _                        => None
         }
       }.asJava)
     }

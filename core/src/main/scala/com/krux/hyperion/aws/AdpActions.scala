@@ -21,13 +21,13 @@ class AdpTerminate extends AdpAction {
  * @param subject The subject line of the Amazon SNS notification message.  String  Yes
  * @param topicArn  The destination Amazon SNS topic ARN for the message. String  Yes
  */
-case class AdpSnsAlarm (
-  id: String,
-  name: Option[String],
-  subject: String,
-  message: String,
+case class AdpSnsAlarm(
+  id:       String,
+  name:     Option[String],
+  subject:  String,
+  message:  String,
   topicArn: String,
-  role: String
+  role:     String
 ) extends AdpAction {
 
   val `type` = "SnsAlarm"

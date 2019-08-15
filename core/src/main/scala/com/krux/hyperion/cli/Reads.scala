@@ -31,12 +31,12 @@ object Reads {
 
   implicit val dateTimeRead: scopt.Read[DateTime] = reads { x =>
     val dt = x.toLowerCase match {
-      case "now" | "today" => DateTime.now
-      case "yesterday" => DateTime.yesterday
-      case "tomorrow" => DateTime.tomorrow
-      case dow if daysOfWeek.keySet contains dow => DateTime.now.withDayOfWeek(daysOfMonth(dow))
+      case "now" | "today"                        => DateTime.now
+      case "yesterday"                            => DateTime.yesterday
+      case "tomorrow"                             => DateTime.tomorrow
+      case dow if daysOfWeek.keySet contains dow  => DateTime.now.withDayOfWeek(daysOfMonth(dow))
       case dom if daysOfMonth.keySet contains dom => DateTime.now.withDayOfMonth(daysOfMonth(dom))
-      case d => DateTime.parse(d)
+      case d                                      => DateTime.parse(d)
     }
 
     dt.withZone(DateTimeZone.UTC)

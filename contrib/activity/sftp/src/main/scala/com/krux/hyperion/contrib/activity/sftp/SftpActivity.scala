@@ -1,13 +1,13 @@
 package com.krux.hyperion.contrib.activity.sftp
 
 import scala.collection.JavaConverters._
-import scala.util.{Failure, Success, Try}
+import scala.util.{ Failure, Success, Try }
 
 import java.io._
 import java.nio.file.Paths
 
 import com.amazonaws.services.s3.AmazonS3ClientBuilder
-import com.jcraft.jsch.{ChannelSftp, JSch, JSchException, UserInfo}
+import com.jcraft.jsch.{ ChannelSftp, JSch, JSchException, UserInfo }
 import org.joda.time.DateTime
 import scopt.OptionParser
 
@@ -23,18 +23,18 @@ object SftpActivity {
   }
 
   case class Options(
-    mode: Option[Action] = None,
-    host: String = "",
-    port: Option[Int] = None,
-    username: Option[String] = None,
-    password: Option[String] = None,
-    identity: Option[String] = None,
-    path: Option[String] = None,
-    pattern: Option[String] = None,
-    since: Option[DateTime] = None,
-    until: Option[DateTime] = None,
-    skipEmpty: Boolean = false,
-    markSuccessfulJobs: Boolean = false
+    mode:               Option[Action]   = None,
+    host:               String           = "",
+    port:               Option[Int]      = None,
+    username:           Option[String]   = None,
+    password:           Option[String]   = None,
+    identity:           Option[String]   = None,
+    path:               Option[String]   = None,
+    pattern:            Option[String]   = None,
+    since:              Option[DateTime] = None,
+    until:              Option[DateTime] = None,
+    skipEmpty:          Boolean          = false,
+    markSuccessfulJobs: Boolean          = false
   )
 
   private def fileToByteArray(file: File): Array[Byte] = {
@@ -252,7 +252,8 @@ object SftpActivity {
         .text(
           """
             |  Uploads files matching PATTERN from INPUT1_STAGING_DIR to the DESTINATION.
-          """.stripMargin)
+          """.stripMargin
+        )
         .children(
           arg[String]("DESTINATION").optional().action((x, c) => c.copy(path = Option(x)))
             .text("Uploads files to DESTINATION.\n")
@@ -262,7 +263,8 @@ object SftpActivity {
         .text(
           """
             |  Downloads files matching PATTERN from SOURCE to OUTPUT1_STAGING_DIR.
-          """.stripMargin)
+          """.stripMargin
+        )
         .children(
           opt[String]("since").valueName("TIMESTAMP").optional().action((x, c) => c.copy(since = Option(new DateTime(x))))
             .text("Download files modified after TIMESTAMP.\n"),

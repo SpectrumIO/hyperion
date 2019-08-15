@@ -1,12 +1,12 @@
 package com.krux.hyperion.activity
 
-import com.krux.hyperion.adt.{HString, HBoolean}
+import com.krux.hyperion.adt.{ HString, HBoolean }
 import com.krux.hyperion.aws.AdpHiveActivity
 import com.krux.hyperion.common.BaseFields
 import com.krux.hyperion.common.PipelineObjectId
 import com.krux.hyperion.datanode.DataNode
 import com.krux.hyperion.expression.RunnableObject
-import com.krux.hyperion.resource.{Resource, BaseEmrCluster}
+import com.krux.hyperion.resource.{ Resource, BaseEmrCluster }
 
 /**
  * Runs a Hive query on an Amazon EMR cluster. HiveActivity makes it easier to set up an Amzon EMR
@@ -18,14 +18,14 @@ import com.krux.hyperion.resource.{Resource, BaseEmrCluster}
  * the Hive column names.
  */
 case class HiveActivity[A <: BaseEmrCluster] private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[A],
+  baseFields:            BaseFields,
+  activityFields:        ActivityFields[A],
   emrTaskActivityFields: EmrTaskActivityFields,
-  hiveScript: Script,
-  scriptVariables: Seq[HString],
-  input: Seq[DataNode],
-  output: Seq[DataNode],
-  hadoopQueue: Option[HString]
+  hiveScript:            Script,
+  scriptVariables:       Seq[HString],
+  input:                 Seq[DataNode],
+  output:                Seq[DataNode],
+  hadoopQueue:           Option[HString]
 ) extends EmrTaskActivity[A] {
 
   type Self = HiveActivity[A]

@@ -11,9 +11,9 @@ import com.krux.hyperion.HyperionContext
  * @param s3Key Amazon S3 key to check for existence.
  */
 case class S3KeyExistsPrecondition private (
-  baseFields: BaseFields,
+  baseFields:         BaseFields,
   preconditionFields: PreconditionFields,
-  s3Key: HS3Uri
+  s3Key:              HS3Uri
 ) extends Precondition {
 
   type Self = S3KeyExistsPrecondition

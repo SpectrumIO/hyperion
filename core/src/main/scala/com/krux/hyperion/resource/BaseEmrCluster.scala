@@ -2,10 +2,9 @@ package com.krux.hyperion.resource
 
 import org.slf4j.Logger
 
-import com.krux.hyperion.adt.{HInt, HDouble, HString, HBoolean, HDuration}
-import com.krux.hyperion.aws.{AdpRef, AdpEmrCluster}
+import com.krux.hyperion.adt.{ HInt, HDouble, HString, HBoolean, HDuration }
+import com.krux.hyperion.aws.{ AdpRef, AdpEmrCluster }
 import com.krux.hyperion.HyperionContext
-
 
 trait BaseEmrCluster extends ResourceObject {
 
@@ -108,7 +107,7 @@ trait BaseEmrCluster extends ResourceObject {
   )
 
   def additionalMasterSecurityGroupIds = emrClusterFields.additionalMasterSecurityGroupIds
-  def withAdditionalMasterSecurityGroupIds(groupIds: HString*): Self =  updateEmrClusterFields(
+  def withAdditionalMasterSecurityGroupIds(groupIds: HString*): Self = updateEmrClusterFields(
     emrClusterFields.copy(additionalMasterSecurityGroupIds = emrClusterFields.additionalMasterSecurityGroupIds ++ groupIds)
   )
 
@@ -118,7 +117,7 @@ trait BaseEmrCluster extends ResourceObject {
   )
 
   def additionalSlaveSecurityGroupIds = emrClusterFields.additionalSlaveSecurityGroupIds
-  def withAdditionalSlaveSecurityGroupIds(groupIds: HString*): Self =  updateEmrClusterFields(
+  def withAdditionalSlaveSecurityGroupIds(groupIds: HString*): Self = updateEmrClusterFields(
     emrClusterFields.copy(additionalSlaveSecurityGroupIds = emrClusterFields.additionalSlaveSecurityGroupIds ++ groupIds)
   )
 
@@ -133,7 +132,7 @@ trait BaseEmrCluster extends ResourceObject {
 
   def configuration = emrClusterFields.configuration
 
-  override def objects =  masterEbsConfiguration ++ coreEbsConfiguration ++ taskEbsConfiguration ++
+  override def objects = masterEbsConfiguration ++ coreEbsConfiguration ++ taskEbsConfiguration ++
     configuration ++ super.objects
 
   override def ref: AdpRef[AdpEmrCluster] = AdpRef(serialize)
@@ -168,9 +167,9 @@ trait BaseEmrCluster extends ResourceObject {
       coreInstanceCount = Option(coreInstanceCount.serialize),
       coreInstanceType = coreInstanceType.map(_.serialize),
       coreEbsConfiguration = coreEbsConfiguration.map(_.ref),
-      taskInstanceBidPrice = if (taskInstanceCount.isZero.forall(! _)) taskInstanceBidPrice.map(_.serialize) else None,
-      taskInstanceCount = if (taskInstanceCount.isZero.forall(! _)) Option(taskInstanceCount.serialize) else None,
-      taskInstanceType = if (taskInstanceCount.isZero.forall(! _)) taskInstanceType.map(_.serialize) else None,
+      taskInstanceBidPrice = if (taskInstanceCount.isZero.forall(!_)) taskInstanceBidPrice.map(_.serialize) else None,
+      taskInstanceCount = if (taskInstanceCount.isZero.forall(!_)) Option(taskInstanceCount.serialize) else None,
+      taskInstanceType = if (taskInstanceCount.isZero.forall(!_)) taskInstanceType.map(_.serialize) else None,
       taskEbsConfiguration = taskEbsConfiguration.map(_.ref),
       region = region.map(_.serialize),
       availabilityZone = availabilityZone.map(_.serialize),

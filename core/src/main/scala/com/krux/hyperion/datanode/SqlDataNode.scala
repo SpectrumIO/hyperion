@@ -9,11 +9,11 @@ import com.krux.hyperion.common.{ BaseFields, PipelineObjectId }
  * requires specify the username, password, etc. within the object, we require a JdbcDatabase
  * object for consistency with other database data node objects.
  */
-case class SqlDataNode (
-  baseFields: BaseFields,
+case class SqlDataNode(
+  baseFields:     BaseFields,
   dataNodeFields: DataNodeFields,
-  tableQuery: TableQuery,
-  database: Database
+  tableQuery:     TableQuery,
+  database:       Database
 ) extends Copyable {
 
   type Self = SqlDataNode
@@ -30,11 +30,11 @@ case class SqlDataNode (
     table = tableQuery.table,
     selectQuery = tableQuery match {
       case q: SelectTableQuery => Option(q.sql)
-      case _ => None
+      case _                   => None
     },
     insertQuery = tableQuery match {
       case q: InsertTableQuery => Option(q.sql)
-      case _ => None
+      case _                   => None
     },
     precondition = seqToOption(preconditions)(_.ref),
     onSuccess = seqToOption(onSuccessAlarms)(_.ref),
@@ -46,7 +46,7 @@ case class SqlDataNode (
 object SqlDataNode {
 
   def apply(tableQuery: TableQuery, database: Database): SqlDataNode =
-   new SqlDataNode(
+    new SqlDataNode(
       baseFields = BaseFields(PipelineObjectId(SqlDataNode.getClass)),
       dataNodeFields = DataNodeFields(),
       tableQuery = tableQuery,

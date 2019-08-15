@@ -1,4 +1,14 @@
 resolvers += "jgit-repo" at "http://download.eclipse.org/jgit/maven"
+resolvers += Resolver.bintrayIvyRepo("spectrumlabs", "sbt-plugins")
+credentials += (
+  for {
+    user <- sys.env.get("BINTRAY_USER")
+    password <- sys.env.get("BINTRAY_PASS")
+  } yield Credentials("Bintray", "dl.bintray.com", user, password)
+  )
+  .getOrElse(Credentials(Path.userHome / ".ivy2" / ".credentials"))
+
+addSbtPlugin("io.getspectrum" % "sbt-spectrum-defaults" % "0.4.0")
 
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "2.3")
 

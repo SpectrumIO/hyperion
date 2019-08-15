@@ -1,28 +1,27 @@
 package com.krux.hyperion.activity
 
 import com.krux.hyperion.HyperionContext
-import com.krux.hyperion.adt.{HBoolean, HS3Uri}
-import com.krux.hyperion.common.{BaseFields, PipelineObjectId}
+import com.krux.hyperion.adt.{ HBoolean, HS3Uri }
+import com.krux.hyperion.common.{ BaseFields, PipelineObjectId }
 import com.krux.hyperion.expression.RunnableObject
-import com.krux.hyperion.resource.{Ec2Resource, Resource}
-
+import com.krux.hyperion.resource.{ Ec2Resource, Resource }
 
 /**
-  * The server-side PGP decryption activity decrypts files from the input location to the output location using the
-  * private decryption key.
-  *
-  * @param baseFields the pipeline base fields
-  * @param activityFields the activity setup fields
-  * @param shellCommandActivityFields the shell command setup fields
-  * @param key the file containing the private decryption key
-  * @param markSuccessfulJobs add a _SUCCESS file to the output location on success
-  */
-case class PgpDecryptActivity private(
-  baseFields: BaseFields,
-  activityFields: ActivityFields[Ec2Resource],
+ * The server-side PGP decryption activity decrypts files from the input location to the output location using the
+ * private decryption key.
+ *
+ * @param baseFields the pipeline base fields
+ * @param activityFields the activity setup fields
+ * @param shellCommandActivityFields the shell command setup fields
+ * @param key the file containing the private decryption key
+ * @param markSuccessfulJobs add a _SUCCESS file to the output location on success
+ */
+case class PgpDecryptActivity private (
+  baseFields:                 BaseFields,
+  activityFields:             ActivityFields[Ec2Resource],
   shellCommandActivityFields: ShellCommandActivityFields,
-  key: HS3Uri,
-  markSuccessfulJobs: HBoolean
+  key:                        HS3Uri,
+  markSuccessfulJobs:         HBoolean
 ) extends PgpActivity {
   type Self = PgpDecryptActivity
 

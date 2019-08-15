@@ -5,12 +5,12 @@ import com.krux.hyperion.aws.AdpRdsDatabase
 import com.krux.hyperion.common.{ PipelineObjectId, BaseFields }
 
 case class RdsDatabase private (
-  baseFields: BaseFields,
-  databaseFields: DatabaseFields,
-  rdsInstanceId: HString,
+  baseFields:       BaseFields,
+  databaseFields:   DatabaseFields,
+  rdsInstanceId:    HString,
   jdbcDriverJarUri: Option[HString],
-  jdbcProperties: Seq[HString],
-  region: Option[HString]
+  jdbcProperties:   Seq[HString],
+  region:           Option[HString]
 ) extends Database {
 
   type Self = RdsDatabase
@@ -39,8 +39,8 @@ case class RdsDatabase private (
 object RdsDatabase {
 
   def apply(
-    username: HString,
-    password: HString,
+    username:      HString,
+    password:      HString,
     rdsInstanceId: HString
   ) = new RdsDatabase(
     baseFields = BaseFields(PipelineObjectId(RdsDatabase.getClass)),

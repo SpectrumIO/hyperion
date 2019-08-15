@@ -2,7 +2,7 @@ package com.krux.hyperion.expression
 
 import org.joda.time.{ DateTime, DateTimeZone }
 
-import com.krux.hyperion.common.{HdfsUri, S3Uri}
+import com.krux.hyperion.common.{ HdfsUri, S3Uri }
 import com.krux.hyperion.expression.ParameterType._
 
 /**
@@ -70,7 +70,6 @@ object GenericParameter {
 
   }
 
-
   implicit object StringGenericParameter extends GenericParameter[String] {
 
     type Exp = StringExp
@@ -131,7 +130,6 @@ object GenericParameter {
 
   }
 
-
   implicit object S3UriGenericParameter extends GenericParameter[S3Uri] {
 
     type Exp = S3UriExp
@@ -146,7 +144,6 @@ object GenericParameter {
     def `type` = S3KeyType
 
   }
-
 
   implicit object HdfsUriGenericParameter extends GenericParameter[HdfsUri] {
 

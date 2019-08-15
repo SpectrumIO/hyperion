@@ -44,16 +44,16 @@ trait AdpPrecondition extends AdpDataPipelineObject {
  *
  * @param tableName The DynamoDB table to check.
  */
-case class AdpDynamoDBDataExistsPrecondition (
-  id: String,
-  name: Option[String],
-  tableName: String,
-  role: String,
+case class AdpDynamoDBDataExistsPrecondition(
+  id:                  String,
+  name:                Option[String],
+  tableName:           String,
+  role:                String,
   preconditionTimeout: Option[String],
-  maximumRetries: Option[String],
-  onFail: Option[Seq[AdpRef[AdpAction]]],
-  onLateAction: Option[Seq[AdpRef[AdpAction]]],
-  onSuccess: Option[Seq[AdpRef[AdpAction]]]
+  maximumRetries:      Option[String],
+  onFail:              Option[Seq[AdpRef[AdpAction]]],
+  onLateAction:        Option[Seq[AdpRef[AdpAction]]],
+  onSuccess:           Option[Seq[AdpRef[AdpAction]]]
 ) extends AdpPrecondition {
 
   val `type` = "DynamoDBDataExists"
@@ -66,15 +66,15 @@ case class AdpDynamoDBDataExistsPrecondition (
  * @param tableName The DynamoDB table to check.
  */
 case class AdpDynamoDBTableExistsPrecondition(
-  id: String,
-  name: Option[String],
-  tableName: String,
-  role: String,
+  id:                  String,
+  name:                Option[String],
+  tableName:           String,
+  role:                String,
   preconditionTimeout: Option[String],
-  maximumRetries: Option[String],
-  onFail: Option[Seq[AdpRef[AdpAction]]],
-  onLateAction: Option[Seq[AdpRef[AdpAction]]],
-  onSuccess: Option[Seq[AdpRef[AdpAction]]]
+  maximumRetries:      Option[String],
+  onFail:              Option[Seq[AdpRef[AdpAction]]],
+  onLateAction:        Option[Seq[AdpRef[AdpAction]]],
+  onSuccess:           Option[Seq[AdpRef[AdpAction]]]
 ) extends AdpPrecondition {
 
   val `type` = "DynamoDBTableExists"
@@ -85,14 +85,14 @@ case class AdpDynamoDBTableExistsPrecondition(
  * Checks whether a data node object exists.
  */
 case class AdpExistsPrecondition(
-  id: String,
-  name: Option[String],
-  role: String,
+  id:                  String,
+  name:                Option[String],
+  role:                String,
   preconditionTimeout: Option[String],
-  maximumRetries: Option[String],
-  onFail: Option[Seq[AdpRef[AdpAction]]],
-  onLateAction: Option[Seq[AdpRef[AdpAction]]],
-  onSuccess: Option[Seq[AdpRef[AdpAction]]]
+  maximumRetries:      Option[String],
+  onFail:              Option[Seq[AdpRef[AdpAction]]],
+  onLateAction:        Option[Seq[AdpRef[AdpAction]]],
+  onSuccess:           Option[Seq[AdpRef[AdpAction]]]
 ) extends AdpPrecondition {
 
   val `type` = "Exists"
@@ -105,15 +105,15 @@ case class AdpExistsPrecondition(
  * @param s3Key Amazon S3 key to check for existence.
  */
 case class AdpS3KeyExistsPrecondition(
-  id: String,
-  name: Option[String],
-  s3Key: String,
-  role: String,
+  id:                  String,
+  name:                Option[String],
+  s3Key:               String,
+  role:                String,
   preconditionTimeout: Option[String],
-  maximumRetries: Option[String],
-  onFail: Option[Seq[AdpRef[AdpAction]]],
-  onLateAction: Option[Seq[AdpRef[AdpAction]]],
-  onSuccess: Option[Seq[AdpRef[AdpAction]]]
+  maximumRetries:      Option[String],
+  onFail:              Option[Seq[AdpRef[AdpAction]]],
+  onLateAction:        Option[Seq[AdpRef[AdpAction]]],
+  onSuccess:           Option[Seq[AdpRef[AdpAction]]]
 ) extends AdpPrecondition {
 
   val `type` = "S3KeyExists"
@@ -126,15 +126,15 @@ case class AdpS3KeyExistsPrecondition(
  * @param s3Prefix  The Amazon S3 prefix to check for existence of objects.
  */
 case class AdpS3PrefixNotEmptyPrecondition(
-  id: String,
-  name: Option[String],
-  s3Prefix: String,
-  role: String,
+  id:                  String,
+  name:                Option[String],
+  s3Prefix:            String,
+  role:                String,
   preconditionTimeout: Option[String],
-  maximumRetries: Option[String],
-  onFail: Option[Seq[AdpRef[AdpAction]]],
-  onLateAction: Option[Seq[AdpRef[AdpAction]]],
-  onSuccess: Option[Seq[AdpRef[AdpAction]]]
+  maximumRetries:      Option[String],
+  onFail:              Option[Seq[AdpRef[AdpAction]]],
+  onLateAction:        Option[Seq[AdpRef[AdpAction]]],
+  onSuccess:           Option[Seq[AdpRef[AdpAction]]]
 ) extends AdpPrecondition {
 
   val `type` = "S3PrefixNotEmpty"
@@ -152,19 +152,19 @@ case class AdpS3PrefixNotEmptyPrecondition(
  *
  */
 case class AdpShellCommandPrecondition(
-  id: String,
-  name: Option[String],
-  command: Option[String],
-  scriptUri: Option[String],
-  scriptArgument: Option[Seq[String]],
-  stdout: Option[String],
-  stderr: Option[String],
-  role: String,
+  id:                  String,
+  name:                Option[String],
+  command:             Option[String],
+  scriptUri:           Option[String],
+  scriptArgument:      Option[Seq[String]],
+  stdout:              Option[String],
+  stderr:              Option[String],
+  role:                String,
   preconditionTimeout: Option[String],
-  maximumRetries: Option[String],
-  onFail: Option[Seq[AdpRef[AdpAction]]],
-  onLateAction: Option[Seq[AdpRef[AdpAction]]],
-  onSuccess: Option[Seq[AdpRef[AdpAction]]]
+  maximumRetries:      Option[String],
+  onFail:              Option[Seq[AdpRef[AdpAction]]],
+  onLateAction:        Option[Seq[AdpRef[AdpAction]]],
+  onSuccess:           Option[Seq[AdpRef[AdpAction]]]
 ) extends AdpPrecondition {
 
   val `type` = "ShellCommandPrecondition"

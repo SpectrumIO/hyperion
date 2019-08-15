@@ -9,15 +9,15 @@ import com.krux.hyperion.HyperionContext
  * EC2 resource
  */
 case class Ec2Resource private (
-  baseFields: BaseFields,
-  resourceFields: ResourceFields,
-  instanceType: HString,
-  imageId: Option[HString],
-  runAsUser: Option[HString],
+  baseFields:               BaseFields,
+  resourceFields:           ResourceFields,
+  instanceType:             HString,
+  imageId:                  Option[HString],
+  runAsUser:                Option[HString],
   associatePublicIpAddress: HBoolean,
-  securityGroups: Seq[HString],
-  securityGroupIds: Seq[HString],
-  spotBidPrice: Option[HDouble]
+  securityGroups:           Seq[HString],
+  securityGroupIds:         Seq[HString],
+  spotBidPrice:             Option[HDouble]
 ) extends ResourceObject {
 
   type Self = Ec2Resource

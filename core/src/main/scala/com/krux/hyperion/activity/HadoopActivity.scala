@@ -1,11 +1,11 @@
 package com.krux.hyperion.activity
 
-import com.krux.hyperion.adt.{HString, HS3Uri}
+import com.krux.hyperion.adt.{ HString, HS3Uri }
 import com.krux.hyperion.aws.AdpHadoopActivity
-import com.krux.hyperion.common.{BaseFields, PipelineObjectId}
+import com.krux.hyperion.common.{ BaseFields, PipelineObjectId }
 import com.krux.hyperion.datanode.S3DataNode
 import com.krux.hyperion.expression.RunnableObject
-import com.krux.hyperion.resource.{Resource, BaseEmrCluster}
+import com.krux.hyperion.resource.{ Resource, BaseEmrCluster }
 
 /**
  * Runs a MapReduce job on a cluster. The cluster can be an EMR cluster managed by AWS Data Pipeline
@@ -15,15 +15,15 @@ import com.krux.hyperion.resource.{Resource, BaseEmrCluster}
  * you can still use EmrActivity.
  */
 case class HadoopActivity[A <: BaseEmrCluster] private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[A],
+  baseFields:            BaseFields,
+  activityFields:        ActivityFields[A],
   emrTaskActivityFields: EmrTaskActivityFields,
-  jarUri: HString,
-  mainClass: Option[MainClass],
-  arguments: Seq[HString],
-  hadoopQueue: Option[HString],
-  inputs: Seq[S3DataNode],
-  outputs: Seq[S3DataNode]
+  jarUri:                HString,
+  mainClass:             Option[MainClass],
+  arguments:             Seq[HString],
+  hadoopQueue:           Option[HString],
+  inputs:                Seq[S3DataNode],
+  outputs:               Seq[S3DataNode]
 ) extends EmrTaskActivity[A] {
 
   type Self = HadoopActivity[A]

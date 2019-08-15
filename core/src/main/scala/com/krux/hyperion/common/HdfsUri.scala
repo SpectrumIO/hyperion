@@ -2,7 +2,6 @@ package com.krux.hyperion.common
 
 import scala.language.implicitConversions
 
-
 case class HdfsUri(ref: String) {
 
   require(ref.startsWith("hdfs://"), "HdfsUri must start with hdfs protocol.")

@@ -4,7 +4,6 @@ import com.krux.hyperion.activity.PipelineActivity
 import com.krux.hyperion.common.PipelineObject
 import com.krux.hyperion.resource.ResourceObject
 
-
 sealed abstract class WorkflowExpression {
 
   def toActivities: Iterable[PipelineActivity[_ <: ResourceObject]] = {
@@ -39,17 +38,17 @@ sealed abstract class WorkflowExpression {
   }
 
   def andThen(right: WorkflowExpression): WorkflowExpression = right match {
-    case WorkflowNoActivityExpression => this
+    case WorkflowNoActivityExpression              => this
     case r if this == WorkflowNoActivityExpression => r
-    case r => WorkflowArrowExpression(this, r)
+    case r                                         => WorkflowArrowExpression(this, r)
   }
 
   def ~>(right: WorkflowExpression): WorkflowExpression = this.andThen(right)
 
   def and(right: WorkflowExpression): WorkflowExpression = right match {
-    case WorkflowNoActivityExpression => this
+    case WorkflowNoActivityExpression              => this
     case r if this == WorkflowNoActivityExpression => r
-    case r => WorkflowPlusExpression(this, right)
+    case r                                         => WorkflowPlusExpression(this, right)
   }
 
   def +(right: WorkflowExpression): WorkflowExpression = this.and(right)

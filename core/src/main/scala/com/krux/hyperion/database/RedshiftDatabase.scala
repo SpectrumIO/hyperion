@@ -8,9 +8,9 @@ import com.krux.hyperion.common.{ PipelineObjectId, BaseFields }
  * Redshift database trait, to use this please extend with an object.
  */
 case class RedshiftDatabase private (
-  baseFields: BaseFields,
+  baseFields:     BaseFields,
   databaseFields: DatabaseFields,
-  clusterId: HString
+  clusterId:      HString
 ) extends Database {
 
   type Self = RedshiftDatabase
@@ -36,8 +36,8 @@ case class RedshiftDatabase private (
 object RedshiftDatabase {
 
   def apply(
-    username: HString,
-    password: HString,
+    username:  HString,
+    password:  HString,
     clusterId: HString
   ) = new RedshiftDatabase(
     baseFields = BaseFields(PipelineObjectId(RdsDatabase.getClass)),

@@ -17,7 +17,7 @@ case class FileRepartitioner(options: Options) {
       // If we are simply merging files then the merge step needs to add the header.
       val headers = options.numberOfFiles match {
         case Some(1) => options.header
-        case _ => None
+        case _       => None
       }
 
       FileMerger(destination, options.skipFirstLine, headers).merge(options.inputs: _*)
@@ -56,9 +56,9 @@ case class FileRepartitioner(options: Options) {
 
       mergedFiles.zipWithIndex.flatMap { case (f, i) =>
         options.output.split('.').toList match {
-          case h :: Nil => Option(f -> s"$h-${fmt.format(i)}")
-          case h :: t => Option(f -> s"$h-${fmt.format(i)}.${t.mkString(".")}")
-          case Nil => None
+          case h :: Nil   => Option(f -> s"$h-${fmt.format(i)}")
+          case h :: t     => Option(f -> s"$h-${fmt.format(i)}.${t.mkString(".")}")
+          case Nil        => None
         }
       }.toMap
   }

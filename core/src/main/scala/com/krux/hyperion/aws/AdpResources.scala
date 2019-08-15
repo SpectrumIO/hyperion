@@ -24,7 +24,6 @@ trait AdpResource extends AdpDataPipelineObject {
 
 }
 
-
 /**
  * An EC2 instance that will perform the work defined by a pipeline activity.
  *
@@ -54,28 +53,28 @@ trait AdpResource extends AdpDataPipelineObject {
  * @param maximumRetries Maximum number attempt retries on failure.
  */
 case class AdpEc2Resource(
-  id: String,
-  name: Option[String],
-  instanceType: Option[String],
-  imageId: Option[String],
-  role: Option[String],
-  resourceRole: Option[String],
-  runAsUser: Option[String],
-  keyPair: Option[String],
-  region: Option[String],
-  availabilityZone: Option[String],
-  subnetId: Option[String],
+  id:                       String,
+  name:                     Option[String],
+  instanceType:             Option[String],
+  imageId:                  Option[String],
+  role:                     Option[String],
+  resourceRole:             Option[String],
+  runAsUser:                Option[String],
+  keyPair:                  Option[String],
+  region:                   Option[String],
+  availabilityZone:         Option[String],
+  subnetId:                 Option[String],
   associatePublicIpAddress: Option[String],
-  securityGroups: Option[Seq[String]],
-  securityGroupIds: Option[Seq[String]],
-  spotBidPrice: Option[String],
+  securityGroups:           Option[Seq[String]],
+  securityGroupIds:         Option[Seq[String]],
+  spotBidPrice:             Option[String],
   useOnDemandOnLastAttempt: Option[String],
-  initTimeout: Option[String],
-  terminateAfter: Option[String],
-  actionOnResourceFailure: Option[String],
-  actionOnTaskFailure: Option[String],
-  httpProxy: Option[AdpRef[AdpHttpProxy]],
-  maximumRetries: Option[String]
+  initTimeout:              Option[String],
+  terminateAfter:           Option[String],
+  actionOnResourceFailure:  Option[String],
+  actionOnTaskFailure:      Option[String],
+  httpProxy:                Option[AdpRef[AdpHttpProxy]],
+  maximumRetries:           Option[String]
 ) extends AdpResource {
 
   val `type` = "Ec2Resource"
@@ -109,45 +108,45 @@ case class AdpEc2Resource(
  * @param maximumRetries Maximum number attempt retries on failure.
  */
 class AdpEmrCluster(
-  val id: String,
-  val name: Option[String],
-  val amiVersion: Option[String],
-  val supportedProducts: Option[String],
-  val bootstrapAction: Seq[String],
-  val enableDebugging: Option[String],
-  val hadoopSchedulerType: Option[String],
-  val keyPair: Option[String],
-  val masterInstanceBidPrice: Option[String],
-  val masterInstanceType: Option[String],
-  val masterEbsConfiguration: Option[AdpRef[AdpEmrEbsConfiguration]],
-  val coreInstanceBidPrice: Option[String],
-  val coreInstanceCount: Option[String],
-  val coreInstanceType: Option[String],
-  val coreEbsConfiguration: Option[AdpRef[AdpEmrEbsConfiguration]],
-  val taskInstanceBidPrice: Option[String],
-  val taskInstanceCount: Option[String],
-  val taskInstanceType: Option[String],
-  val taskEbsConfiguration: Option[AdpRef[AdpEmrEbsConfiguration]],
-  val region: Option[String],
-  val availabilityZone: Option[String],
-  val resourceRole: Option[String],
-  val role: Option[String],
-  val subnetId: Option[String],
-  val emrManagedMasterSecurityGroupId: Option[String],
+  val id:                               String,
+  val name:                             Option[String],
+  val amiVersion:                       Option[String],
+  val supportedProducts:                Option[String],
+  val bootstrapAction:                  Seq[String],
+  val enableDebugging:                  Option[String],
+  val hadoopSchedulerType:              Option[String],
+  val keyPair:                          Option[String],
+  val masterInstanceBidPrice:           Option[String],
+  val masterInstanceType:               Option[String],
+  val masterEbsConfiguration:           Option[AdpRef[AdpEmrEbsConfiguration]],
+  val coreInstanceBidPrice:             Option[String],
+  val coreInstanceCount:                Option[String],
+  val coreInstanceType:                 Option[String],
+  val coreEbsConfiguration:             Option[AdpRef[AdpEmrEbsConfiguration]],
+  val taskInstanceBidPrice:             Option[String],
+  val taskInstanceCount:                Option[String],
+  val taskInstanceType:                 Option[String],
+  val taskEbsConfiguration:             Option[AdpRef[AdpEmrEbsConfiguration]],
+  val region:                           Option[String],
+  val availabilityZone:                 Option[String],
+  val resourceRole:                     Option[String],
+  val role:                             Option[String],
+  val subnetId:                         Option[String],
+  val emrManagedMasterSecurityGroupId:  Option[String],
   val additionalMasterSecurityGroupIds: Option[Seq[String]],
-  val emrManagedSlaveSecurityGroupId: Option[String],
-  val additionalSlaveSecurityGroupIds: Option[Seq[String]],
-  val useOnDemandOnLastAttempt: Option[String],
-  val visibleToAllUsers: Option[String],
-  val initTimeout: Option[String],
-  val terminateAfter: Option[String],
-  val actionOnResourceFailure: Option[String],
-  val actionOnTaskFailure: Option[String],
-  val httpProxy: Option[AdpRef[AdpHttpProxy]],
-  val releaseLabel: Option[String],
-  val applications: Option[Seq[String]],
-  val configuration: Option[Seq[AdpRef[AdpEmrConfiguration]]],
-  val maximumRetries: Option[String]
+  val emrManagedSlaveSecurityGroupId:   Option[String],
+  val additionalSlaveSecurityGroupIds:  Option[Seq[String]],
+  val useOnDemandOnLastAttempt:         Option[String],
+  val visibleToAllUsers:                Option[String],
+  val initTimeout:                      Option[String],
+  val terminateAfter:                   Option[String],
+  val actionOnResourceFailure:          Option[String],
+  val actionOnTaskFailure:              Option[String],
+  val httpProxy:                        Option[AdpRef[AdpHttpProxy]],
+  val releaseLabel:                     Option[String],
+  val applications:                     Option[Seq[String]],
+  val configuration:                    Option[Seq[AdpRef[AdpEmrConfiguration]]],
+  val maximumRetries:                   Option[String]
 ) extends AdpResource {
 
   val `type` = "EmrCluster"
@@ -155,9 +154,9 @@ class AdpEmrCluster(
 }
 
 case class AdpProperty(
-  id: String,
-  name: Option[String],
-  key: Option[String],
+  id:    String,
+  name:  Option[String],
+  key:   Option[String],
   value: Option[String]
 ) extends AdpDataPipelineObject {
 
@@ -166,11 +165,11 @@ case class AdpProperty(
 }
 
 case class AdpEmrConfiguration(
-  id: String,
-  name: Option[String],
+  id:             String,
+  name:           Option[String],
   classification: Option[String],
-  property: Option[Seq[AdpRef[AdpProperty]]],
-  configuration: Option[Seq[AdpRef[AdpEmrConfiguration]]]
+  property:       Option[Seq[AdpRef[AdpProperty]]],
+  configuration:  Option[Seq[AdpRef[AdpEmrConfiguration]]]
 ) extends AdpDataPipelineObject {
 
   val `type` = "EmrConfiguration"
@@ -178,9 +177,9 @@ case class AdpEmrConfiguration(
 }
 
 case class AdpEmrEbsConfiguration(
-  id: String,
-  name: Option[String],
-  ebsOptimized: Option[String],
+  id:                   String,
+  name:                 Option[String],
+  ebsOptimized:         Option[String],
   ebsBlockDeviceConfig: Option[AdpRef[AdpEmrEbsBlockDeviceConfig]]
 ) extends AdpDataPipelineObject {
 
@@ -189,23 +188,23 @@ case class AdpEmrEbsConfiguration(
 }
 
 case class AdpEmrEbsBlockDeviceConfig(
-  id: String,
-  name: Option[String],
-  volumesPerInstance: Option[String],
+  id:                  String,
+  name:                Option[String],
+  volumesPerInstance:  Option[String],
   volumeSpecification: Option[AdpRef[AdpEmrVolumeSpecification]]
-)extends AdpDataPipelineObject {
+) extends AdpDataPipelineObject {
 
   val `type` = "EbsBlockDeviceConfig"
 
 }
 
 case class AdpEmrVolumeSpecification(
-  id: String,
-  name: Option[String],
-  sizeInGB: Option[String],
+  id:         String,
+  name:       Option[String],
+  sizeInGB:   Option[String],
   volumeType: Option[String],
-  iops: Option[String]
-)extends AdpDataPipelineObject {
+  iops:       Option[String]
+) extends AdpDataPipelineObject {
 
   val `type` = "VolumeSpecification"
 

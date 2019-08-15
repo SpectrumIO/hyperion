@@ -5,11 +5,10 @@ import com.typesafe.config.ConfigFactory
 import com.krux.hyperion.action.SnsAlarm
 import com.krux.hyperion.activity._
 import com.krux.hyperion.common.S3Uri
-import com.krux.hyperion.expression.{Parameter, RuntimeNode}
+import com.krux.hyperion.expression.{ Parameter, RuntimeNode }
 import com.krux.hyperion.Implicits._
 import com.krux.hyperion.resource.EmrCluster
-import com.krux.hyperion.{DataPipelineDef, HyperionContext, Schedule, HyperionCli}
-
+import com.krux.hyperion.{ DataPipelineDef, HyperionContext, Schedule, HyperionCli }
 
 object ExampleMapReduce extends DataPipelineDef with HyperionCli {
 
@@ -80,7 +79,6 @@ object ExampleMapReduce extends DataPipelineDef with HyperionCli {
       (EmrActivity.ScheduledStartTime - 3.days).format("yyyy-MM-dd"),
       "denormalized"
     )
-
 
   override def workflow = filterActivity ~> scoreActivity ~> scoreHadoopActivity
 

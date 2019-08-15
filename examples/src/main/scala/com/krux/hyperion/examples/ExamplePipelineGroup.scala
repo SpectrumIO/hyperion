@@ -3,11 +3,15 @@ package com.krux.hyperion.examples
 import com.typesafe.config.ConfigFactory
 
 import com.krux.hyperion.workflow.WorkflowExpression
-import com.krux.hyperion.{ DataPipelineDefGroup, Schedule, WorkflowKey, HyperionContext,
-  HyperionCli }
+import com.krux.hyperion.{
+  DataPipelineDefGroup,
+  Schedule,
+  WorkflowKey,
+  HyperionContext,
+  HyperionCli
+}
 import com.krux.hyperion.activity.ShellCommandActivity
 import com.krux.hyperion.resource.Ec2Resource
-
 
 object ExamplePipelineGroup extends DataPipelineDefGroup with HyperionCli {
 

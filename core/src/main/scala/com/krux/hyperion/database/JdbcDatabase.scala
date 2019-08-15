@@ -8,12 +8,12 @@ import com.krux.hyperion.common.{ PipelineObjectId, BaseFields }
  * Defines a JDBC database
  */
 case class JdbcDatabase private (
-  baseFields: BaseFields,
-  databaseFields: DatabaseFields,
+  baseFields:       BaseFields,
+  databaseFields:   DatabaseFields,
   connectionString: HString,
-  jdbcDriverClass: HString,
+  jdbcDriverClass:  HString,
   jdbcDriverJarUri: Option[HString],
-  jdbcProperties: Seq[HString]
+  jdbcProperties:   Seq[HString]
 ) extends Database {
 
   type Self = JdbcDatabase
@@ -41,10 +41,10 @@ case class JdbcDatabase private (
 object JdbcDatabase {
 
   def apply(
-    username: HString,
-    password: HString,
+    username:         HString,
+    password:         HString,
     connectionString: HString,
-    jdbcDriverClass: HString
+    jdbcDriverClass:  HString
   ) = new JdbcDatabase(
     baseFields = BaseFields(PipelineObjectId(JdbcDatabase.getClass)),
     databaseFields = DatabaseFields(username = username, `*password` = password),

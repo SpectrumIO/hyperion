@@ -5,7 +5,6 @@ import java.util.zip.{ GZIPInputStream, GZIPOutputStream }
 
 import org.apache.commons.io.IOUtils
 
-
 case class FileMerger(destination: File, skipFirstLine: Boolean = false, headers: Option[String] = None) {
   def merge(sources: File*): File = {
     val output: OutputStream = new BufferedOutputStream({
@@ -28,7 +27,7 @@ case class FileMerger(destination: File, skipFirstLine: Boolean = false, headers
   private def doSkipFirstLine(input: InputStream): InputStream = {
     while (skipFirstLine && (input.read() match {
       case -1 | '\n' => false
-      case _ => true
+      case _         => true
     })) {}
 
     input

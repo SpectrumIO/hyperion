@@ -5,8 +5,8 @@ import com.krux.hyperion.common.{ PipelineObject, BaseFields, PipelineObjectId, 
 import com.krux.hyperion.adt.{ HS3Uri, HString }
 
 case class ShellScriptConfig(
-  baseFields: BaseFields,
-  scriptUri: HS3Uri,
+  baseFields:      BaseFields,
+  scriptUri:       HS3Uri,
   scriptArguments: Seq[HString]
 ) extends NamedPipelineObject {
 

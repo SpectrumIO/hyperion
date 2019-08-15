@@ -1,8 +1,8 @@
 package com.krux.hyperion.resource
 
-import com.krux.hyperion.adt.{HBoolean, HInt}
+import com.krux.hyperion.adt.{ HBoolean, HInt }
 import com.krux.hyperion.aws._
-import com.krux.hyperion.common.{BaseFields, NamedPipelineObject, PipelineObjectId}
+import com.krux.hyperion.common.{ BaseFields, NamedPipelineObject, PipelineObjectId }
 import com.krux.hyperion.resource.EmrVolumeSpecification.VolumeType
 
 /**
@@ -10,8 +10,8 @@ import com.krux.hyperion.resource.EmrVolumeSpecification.VolumeType
  * https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/emrcluster-example-ebs.html
  */
 case class EmrEbsConfiguration private (
-  baseFields: BaseFields,
-  ebsOptimized: Option[HBoolean],
+  baseFields:           BaseFields,
+  ebsOptimized:         Option[HBoolean],
   ebsBlockDeviceConfig: Option[EmrEbsBlockDeviceConfig]
 ) extends NamedPipelineObject {
 
@@ -40,10 +40,9 @@ object EmrEbsConfiguration {
   )
 }
 
-
 case class EmrEbsBlockDeviceConfig private (
-  baseFields: BaseFields,
-  volumesPerInstance: Option[HInt],
+  baseFields:          BaseFields,
+  volumesPerInstance:  Option[HInt],
   volumeSpecification: Option[EmrVolumeSpecification]
 ) extends NamedPipelineObject {
 
@@ -74,9 +73,9 @@ object EmrEbsBlockDeviceConfig {
 
 case class EmrVolumeSpecification private (
   baseFields: BaseFields,
-  sizeInGB: Option[HInt],
+  sizeInGB:   Option[HInt],
   volumeType: Option[VolumeType],
-  iops: Option[HInt]
+  iops:       Option[HInt]
 ) extends NamedPipelineObject {
 
   type Self = EmrVolumeSpecification
@@ -98,15 +97,15 @@ case class EmrVolumeSpecification private (
 
 object EmrVolumeSpecification {
   /**
-  * https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
-  */
+   * https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
+   */
   sealed abstract class VolumeType(val serialize: String) {
     override def toString = serialize
   }
 
   case object GeneralPurposeSSD extends VolumeType("gp2")
-  case object ProvisionedIopsSSD  extends VolumeType("io1")
-  case object ThroughputOptimizedHDD  extends VolumeType("st1")
+  case object ProvisionedIopsSSD extends VolumeType("io1")
+  case object ThroughputOptimizedHDD extends VolumeType("st1")
   case object ColdHDD extends VolumeType("sc1")
 
   def apply(sizeInGB: HInt, volumeType: VolumeType, iops: HInt): EmrVolumeSpecification = EmrVolumeSpecification(
@@ -123,5 +122,4 @@ object EmrVolumeSpecification {
     iops = None
   )
 }
-
 

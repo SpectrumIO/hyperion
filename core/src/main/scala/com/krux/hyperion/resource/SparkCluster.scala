@@ -3,19 +3,18 @@ package com.krux.hyperion.resource
 import org.slf4j.LoggerFactory
 
 import com.krux.hyperion.adt.HString
-import com.krux.hyperion.common.{PipelineObjectId, BaseFields}
+import com.krux.hyperion.common.{ PipelineObjectId, BaseFields }
 import com.krux.hyperion.HyperionContext
-
 
 /**
  * Launch a Spark cluster (pre EMR release label 4.0.0)
  */
 @deprecated("Use EmrCluster with Spark Application instead", "5.0.0")
 case class SparkCluster private (
-  baseFields: BaseFields,
-  resourceFields: ResourceFields,
+  baseFields:       BaseFields,
+  resourceFields:   ResourceFields,
   emrClusterFields: EmrClusterFields,
-  sparkVersion: Option[HString]
+  sparkVersion:     Option[HString]
 ) extends BaseEmrCluster {
 
   type Self = SparkCluster

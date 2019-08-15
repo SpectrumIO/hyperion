@@ -2,19 +2,18 @@ package com.krux.hyperion.activity
 
 import com.krux.hyperion.adt.HString
 import com.krux.hyperion.aws.AdpEmrActivity
-import com.krux.hyperion.common.{BaseFields, PipelineObjectId}
+import com.krux.hyperion.common.{ BaseFields, PipelineObjectId }
 import com.krux.hyperion.datanode.S3DataNode
 import com.krux.hyperion.expression.RunnableObject
-import com.krux.hyperion.resource.{BaseEmrCluster, Resource}
-
+import com.krux.hyperion.resource.{ BaseEmrCluster, Resource }
 
 case class EmrActivity private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[BaseEmrCluster],
-  steps: Seq[BaseEmrStep],
-  inputs: Seq[S3DataNode],
-  outputs: Seq[S3DataNode],
-  preStepCommands: Seq[HString],
+  baseFields:       BaseFields,
+  activityFields:   ActivityFields[BaseEmrCluster],
+  steps:            Seq[BaseEmrStep],
+  inputs:           Seq[S3DataNode],
+  outputs:          Seq[S3DataNode],
+  preStepCommands:  Seq[HString],
   postStepCommands: Seq[HString]
 ) extends BaseEmrActivity[BaseEmrCluster] {
 

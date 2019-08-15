@@ -13,9 +13,9 @@ trait AdpDataFormat extends AdpDataPipelineObject
  * A comma-delimited data format where the column separator is a comma and the record separator is a newline character.
  */
 case class AdpCsvDataFormat(
-  id: String,
-  name: Option[String],
-  column: Option[Seq[String]],
+  id:         String,
+  name:       Option[String],
+  column:     Option[Seq[String]],
   escapeChar: Option[String]
 ) extends AdpDataFormat {
 
@@ -29,9 +29,9 @@ case class AdpCsvDataFormat(
  * A custom data format defined by a combination of a certain column separator, record separator, and escape character.
  */
 case class AdpCustomDataFormat(
-  id: String,
-  name: Option[String],
-  column: Option[Seq[String]],
+  id:              String,
+  name:            Option[String],
+  column:          Option[Seq[String]],
   columnSeparator: String,
   recordSeparator: String
 ) extends AdpDataFormat {
@@ -46,8 +46,8 @@ case class AdpCustomDataFormat(
  * Applies a schema to a DynamoDB table to make it accessible by a Hive query. DynamoDBDataFormat is used with a HiveActivity object and a DynamoDBDataNode input and output. DynamoDBDataFormat requires that you specify all columns in your Hive query. For more flexibility to specify certain columns in a Hive query or Amazon S3 support, see DynamoDBExportDataFormat.
  */
 case class AdpDynamoDBDataFormat(
-  id: String,
-  name: Option[String],
+  id:     String,
+  name:   Option[String],
   column: Option[Seq[String]]
 ) extends AdpDataFormat {
 
@@ -67,8 +67,8 @@ case class AdpDynamoDBDataFormat(
  * * Exports all attributes from DynamoDB even if you have a sparse schema
  */
 case class AdpDynamoDBExportDataFormat(
-  id: String,
-  name: Option[String],
+  id:     String,
+  name:   Option[String],
   column: Option[Seq[String]]
 ) extends AdpDataFormat {
 
@@ -86,10 +86,10 @@ case class AdpDynamoDBExportDataFormat(
  *                     using Java formatter syntax.
  */
 case class AdpRegExDataFormat(
-  id: String,
-  name: Option[String],
-  column: Option[Seq[String]],
-  inputRegEx: String,
+  id:           String,
+  name:         Option[String],
+  column:       Option[Seq[String]],
+  inputRegEx:   String,
   outputFormat: String
 ) extends AdpDataFormat {
 
@@ -113,9 +113,9 @@ case class AdpRegExDataFormat(
  * character.
  */
 case class AdpTsvDataFormat(
-  id: String,
-  name: Option[String],
-  column: Option[Seq[String]],
+  id:         String,
+  name:       Option[String],
+  column:     Option[Seq[String]],
   escapeChar: Option[String]
 ) extends AdpDataFormat {
 

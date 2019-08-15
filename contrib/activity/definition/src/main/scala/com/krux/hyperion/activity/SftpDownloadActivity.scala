@@ -10,12 +10,12 @@ import com.krux.hyperion.resource.{ Ec2Resource, Resource }
  * Activity that downloads from an SFTP endpoint into an S3 endpoint.
  */
 case class SftpDownloadActivity private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[Ec2Resource],
+  baseFields:                 BaseFields,
+  activityFields:             ActivityFields[Ec2Resource],
   shellCommandActivityFields: ShellCommandActivityFields,
-  sftpActivityFields: SftpActivityFields,
-  scriptUriBase: HString,
-  sftpPath: Option[HString]
+  sftpActivityFields:         SftpActivityFields,
+  scriptUriBase:              HString,
+  sftpPath:                   Option[HString]
 ) extends SftpActivity with WithS3Output {
 
   type Self = SftpDownloadActivity

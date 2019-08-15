@@ -8,7 +8,7 @@ import com.krux.hyperion.common.PipelineObjectId
 import com.krux.hyperion.resource.ResourceObject
 
 class WorkflowGraph private (
-  val flow: Map[PipelineObjectId, Set[PipelineObjectId]],
+  val flow:       Map[PipelineObjectId, Set[PipelineObjectId]],
   val activities: Map[PipelineObjectId, PipelineActivity[_ <: ResourceObject]]
 ) {
 
@@ -56,7 +56,7 @@ class WorkflowGraph private (
   def +(act1: PipelineActivity[_ <: ResourceObject], act2: PipelineActivity[_ <: ResourceObject]) = {
     val dependents = flow.get(act1.id) match {
       case Some(acts) => acts + act2.id
-      case None => Set(act2.id)
+      case None       => Set(act2.id)
     }
 
     val newActivities = activities + (act1.id -> act1) + (act2.id -> act2)
@@ -88,8 +88,8 @@ class WorkflowGraph private (
   private def mergeFlow(flow1: Flow, flow2: Flow): Flow =
     flow2.foldLeft(flow1) { case (f, (act, dependents)) =>
       val newDependents = f.get(act) match {
-        case Some(ds) => ds ++ dependents
-        case None => dependents
+        case Some(ds)   => ds ++ dependents
+        case None       => dependents
       }
       f + (act -> newDependents)
     }

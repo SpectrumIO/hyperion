@@ -1,13 +1,12 @@
 package com.krux.hyperion.resource
 
-import com.krux.hyperion.aws.{AdpEmrConfiguration, AdpRef}
-import com.krux.hyperion.common.{BaseFields, PipelineObjectId, NamedPipelineObject}
-
+import com.krux.hyperion.aws.{ AdpEmrConfiguration, AdpRef }
+import com.krux.hyperion.common.{ BaseFields, PipelineObjectId, NamedPipelineObject }
 
 case class EmrConfiguration private (
-  baseFields: BaseFields,
+  baseFields:     BaseFields,
   classification: Option[String],
-  properties: Seq[Property],
+  properties:     Seq[Property],
   configurations: Seq[EmrConfiguration]
 ) extends NamedPipelineObject {
 

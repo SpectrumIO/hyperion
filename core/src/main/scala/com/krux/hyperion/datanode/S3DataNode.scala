@@ -6,7 +6,7 @@ import com.krux.hyperion.aws.AdpS3DataNode
 import com.krux.hyperion.common.S3Uri
 import com.krux.hyperion.common.PipelineObject
 import com.krux.hyperion.dataformat.DataFormat
-import com.krux.hyperion.adt.{HS3Uri, HBoolean}
+import com.krux.hyperion.adt.{ HS3Uri, HBoolean }
 import com.krux.hyperion.common.{ BaseFields, PipelineObjectId }
 
 sealed trait S3DataNode extends Copyable {
@@ -59,10 +59,10 @@ object S3DataNode {
  * Defines data from s3
  */
 case class S3File private (
-  baseFields: BaseFields,
-  dataNodeFields: DataNodeFields,
+  baseFields:       BaseFields,
+  dataNodeFields:   DataNodeFields,
   s3DataNodeFields: S3DataNodeFields,
-  filePath: HS3Uri
+  filePath:         HS3Uri
 ) extends S3DataNode {
 
   type Self = S3File
@@ -102,11 +102,11 @@ object S3File {
 /**
  * Defines data from s3 directory
  */
-case class S3Folder private(
-  baseFields: BaseFields,
-  dataNodeFields: DataNodeFields,
+case class S3Folder private (
+  baseFields:       BaseFields,
+  dataNodeFields:   DataNodeFields,
   s3DataNodeFields: S3DataNodeFields,
-  directoryPath: HS3Uri
+  directoryPath:    HS3Uri
 ) extends S3DataNode {
 
   type Self = S3Folder

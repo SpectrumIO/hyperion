@@ -1,11 +1,10 @@
 package com.krux.hyperion.activity
 
-import com.krux.hyperion.adt.{HString, HS3Uri}
-
+import com.krux.hyperion.adt.{ HString, HS3Uri }
 
 case class EmrStep private (
   jarUri: HString,
-  args: Seq[HString]
+  args:   Seq[HString]
 ) extends BaseEmrStep {
 
   def mainClass = None

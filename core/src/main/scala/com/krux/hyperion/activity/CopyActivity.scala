@@ -20,10 +20,10 @@ import com.krux.hyperion.resource.{ Resource, Ec2Resource }
  * default CsvDataFormat for tasks involving both exporting to S3 and copy to redshift.
  */
 case class CopyActivity private (
-  baseFields: BaseFields,
+  baseFields:     BaseFields,
   activityFields: ActivityFields[Ec2Resource],
-  input: Copyable,
-  output: Copyable
+  input:          Copyable,
+  output:         Copyable
 ) extends PipelineActivity[Ec2Resource] {
 
   type Self = CopyActivity

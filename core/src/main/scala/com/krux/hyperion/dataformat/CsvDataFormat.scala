@@ -9,9 +9,9 @@ import com.krux.hyperion.common.{ BaseFields, PipelineObjectId }
  * a newline character.
  */
 case class CsvDataFormat private (
-  baseFields: BaseFields,
+  baseFields:       BaseFields,
   dataFormatFields: DataFormatFields,
-  escapeChar: Option[HString]
+  escapeChar:       Option[HString]
 ) extends DataFormat {
 
   type Self = CsvDataFormat

@@ -8,7 +8,7 @@ import com.krux.hyperion.HyperionContext
  * Checks whether a data node object exists.
  */
 case class ExistsPrecondition private (
-  baseFields: BaseFields,
+  baseFields:         BaseFields,
   preconditionFields: PreconditionFields
 ) extends Precondition {
 

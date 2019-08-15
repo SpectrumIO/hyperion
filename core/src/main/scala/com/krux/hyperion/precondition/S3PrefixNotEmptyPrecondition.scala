@@ -11,9 +11,9 @@ import com.krux.hyperion.HyperionContext
  * @param s3Prefix  The Amazon S3 prefix to check for existence of objects.
  */
 case class S3PrefixNotEmptyPrecondition private (
-  baseFields: BaseFields,
+  baseFields:         BaseFields,
   preconditionFields: PreconditionFields,
-  s3Prefix: HS3Uri
+  s3Prefix:           HS3Uri
 ) extends Precondition {
 
   type Self = S3PrefixNotEmptyPrecondition

@@ -8,9 +8,9 @@ import com.krux.hyperion.common.{ BaseFields, PipelineObjectId }
  * A tab-delimited data format where the record separator is a newline character.
  */
 case class TsvDataFormat private (
-  baseFields: BaseFields,
+  baseFields:       BaseFields,
   dataFormatFields: DataFormatFields,
-  escapeChar: Option[HString]
+  escapeChar:       Option[HString]
 ) extends DataFormat {
 
   type Self = TsvDataFormat

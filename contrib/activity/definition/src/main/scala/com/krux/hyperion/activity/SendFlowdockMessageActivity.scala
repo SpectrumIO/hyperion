@@ -7,16 +7,16 @@ import com.krux.hyperion.expression.RunnableObject
 import com.krux.hyperion.resource.{ Ec2Resource, Resource }
 
 case class SendFlowdockMessageActivity private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[Ec2Resource],
+  baseFields:                 BaseFields,
+  activityFields:             ActivityFields[Ec2Resource],
   shellCommandActivityFields: ShellCommandActivityFields,
-  jarUri: HString,
-  mainClass: HString,
-  flowApiToken: HString,
-  message: HString,
-  user: HString,
-  continueOnError: HBoolean,
-  tags: Seq[HString]
+  jarUri:                     HString,
+  mainClass:                  HString,
+  flowApiToken:               HString,
+  message:                    HString,
+  user:                       HString,
+  continueOnError:            HBoolean,
+  tags:                       Seq[HString]
 ) extends BaseShellCommandActivity {
 
   type Self = SendFlowdockMessageActivity

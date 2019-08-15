@@ -5,8 +5,13 @@ import scala.collection.JavaConverters._
 
 import com.amazonaws.services.s3.AmazonS3ClientBuilder
 import com.amazonaws.services.s3.model.{
-  CannedAccessControlList, CanonicalGrantee, EmailAddressGrantee, Grantee, GroupGrantee,
-  ObjectListing, Permission
+  CannedAccessControlList,
+  CanonicalGrantee,
+  EmailAddressGrantee,
+  Grantee,
+  GroupGrantee,
+  ObjectListing,
+  Permission
 }
 import scopt.OptionParser
 
@@ -23,7 +28,7 @@ object SetS3Acl {
 
     val (bucket: String, key: String) = ref.stripPrefix(S3Protocol).split("/", 2) match {
       case Array(b, k) => (b, k)
-      case Array(b) => (b, "")
+      case Array(b)    => (b, "")
     }
   }
 
@@ -47,7 +52,7 @@ object SetS3Acl {
 
   case class Grant(
     permission: Permission,
-    grantee: Grantee
+    grantee:    Grantee
   )
 
   object Grant {
@@ -66,10 +71,10 @@ object SetS3Acl {
   }
 
   case class Cli(
-    acl: Seq[CannedAccessControlList] = Seq(),
-    grants: Seq[Grant] = Seq(),
-    recursive: Boolean = false,
-    s3Uri: String = ""
+    acl:       Seq[CannedAccessControlList] = Seq(),
+    grants:    Seq[Grant]                   = Seq(),
+    recursive: Boolean                      = false,
+    s3Uri:     String                       = ""
   )
 
   def apply(cli: Cli): Unit = {
@@ -96,10 +101,10 @@ object SetS3Acl {
 
     @tailrec
     def applyRecursive(
-        bucketName: String,
-        prefix: String,
-        previousBatch: Option[ObjectListing] = None
-      ): Unit = {
+      bucketName:    String,
+      prefix:        String,
+      previousBatch: Option[ObjectListing] = None
+    ): Unit = {
 
       previousBatch match {
         case Some(previousListing) =>
@@ -148,7 +153,7 @@ object SetS3Acl {
 
     parser.parse(args, Cli()) match {
       case Some(cli) => apply(cli)
-      case None => throw new RuntimeException("Invalid cli format")
+      case None      => throw new RuntimeException("Invalid cli format")
     }
   }
 }

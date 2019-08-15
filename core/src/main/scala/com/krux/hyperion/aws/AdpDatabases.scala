@@ -31,14 +31,14 @@ trait AdpDatabase extends AdpDataPipelineObject {
  *   an account different than the pipeline.
  */
 case class AdpRedshiftDatabase(
-  id: String,
-  name: Option[String],
-  clusterId: String,
+  id:               String,
+  name:             Option[String],
+  clusterId:        String,
   connectionString: Option[String],
-  databaseName: Option[String],
-  username: String,
-  `*password`: String,
-  jdbcProperties: Option[Seq[String]]
+  databaseName:     Option[String],
+  username:         String,
+  `*password`:      String,
+  jdbcProperties:   Option[Seq[String]]
 ) extends AdpDatabase {
 
   val `type` = "RedshiftDatabase"
@@ -52,15 +52,15 @@ case class AdpRedshiftDatabase(
  * @param jdbcDriverClass The driver class to load before establishing the JDBC connection.
  */
 case class AdpJdbcDatabase(
-  id: String,
-  name: Option[String],
+  id:               String,
+  name:             Option[String],
   connectionString: String,
-  databaseName: Option[String],
-  username: String,
-  `*password`: String,
+  databaseName:     Option[String],
+  username:         String,
+  `*password`:      String,
   jdbcDriverJarUri: Option[String],
-  jdbcDriverClass: String,
-  jdbcProperties: Option[Seq[String]]
+  jdbcDriverClass:  String,
+  jdbcProperties:   Option[Seq[String]]
 ) extends AdpDatabase {
 
   val `type` = "JdbcDatabase"
@@ -71,14 +71,14 @@ case class AdpJdbcDatabase(
  * Defines an Amazon RDS database.
  */
 case class AdpRdsDatabase(
-  id: String,
-  name: Option[String],
-  databaseName: Option[String],
-  jdbcProperties: Option[Seq[String]],
-  username: String,
-  `*password`: String,
-  rdsInstanceId: String,
-  region: Option[String],
+  id:               String,
+  name:             Option[String],
+  databaseName:     Option[String],
+  jdbcProperties:   Option[Seq[String]],
+  username:         String,
+  `*password`:      String,
+  rdsInstanceId:    String,
+  region:           Option[String],
   jdbcDriverJarUri: Option[String]
 ) extends AdpDatabase {
 

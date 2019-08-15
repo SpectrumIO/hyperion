@@ -8,8 +8,7 @@ import com.krux.hyperion.activity.ShellCommandActivity
 import com.krux.hyperion.Implicits._
 import com.krux.hyperion.resource.Ec2Resource
 import com.krux.hyperion.workflow.WorkflowExpression
-import com.krux.hyperion.{DataPipelineDefGroup, Schedule, WorkflowKey, HyperionContext, HyperionCli}
-
+import com.krux.hyperion.{ DataPipelineDefGroup, Schedule, WorkflowKey, HyperionContext, HyperionCli }
 
 object ExamplePipelineGroupWithSchedulerDelay extends DataPipelineDefGroup with HyperionCli {
 

@@ -1,6 +1,6 @@
 package com.krux.hyperion.expression
 
-import org.joda.time.{DateTime, Period}
+import org.joda.time.{ DateTime, Period }
 
 import scala.language.implicitConversions
 import scala.util.Try
@@ -36,46 +36,46 @@ object TypedExpression {
 
 trait IntExp extends TypedExpression { self =>
 
-  def + (e: IntExp) = new IntExp {
+  def +(e: IntExp) = new IntExp {
     def content = s"${self.content} + ${e.content}"
   }
 
-  def + (e: DoubleExp) = new DoubleExp {
+  def +(e: DoubleExp) = new DoubleExp {
     def content = s"${self.content} + ${e.content}"
   }
 
-  def - (e: IntExp) = new IntExp {
+  def -(e: IntExp) = new IntExp {
     def content = s"${self.content} - ${e.content}"
   }
 
-  def - (e: DoubleExp) = new DoubleExp {
+  def -(e: DoubleExp) = new DoubleExp {
     def content = s"${self.content} - ${e.content}"
   }
 
-  def * (e: IntExp) = new IntExp {
+  def *(e: IntExp) = new IntExp {
     def content = s"${self.content} * ${e.content}"
   }
 
-  def * (e: DoubleExp) = new DoubleExp {
+  def *(e: DoubleExp) = new DoubleExp {
     def content = s"${self.content} * ${e.content}"
   }
 
-  def / (e: IntExp) = new IntExp {
+  def /(e: IntExp) = new IntExp {
     def content = s"${self.content} / ${e.content}"
   }
 
-  def / (e: DoubleExp) = new DoubleExp {
+  def /(e: DoubleExp) = new DoubleExp {
     def content = s"${self.content} / ${e.content}"
   }
 
   /**
    * @note for ^ case, it always returns DoubleExp regardless of the type of the paramenter
    */
-  def ^ (e: IntExp) = new DoubleExp {
+  def ^(e: IntExp) = new DoubleExp {
     def content = s"${self.content} ^ ${e.content}"
   }
 
-  def ^ (e: DoubleExp) = new DoubleExp {
+  def ^(e: DoubleExp) = new DoubleExp {
     def content = s"${self.content} ^ ${e.content}"
   }
 
@@ -85,43 +85,43 @@ trait LongExp extends TypedExpression
 
 trait DoubleExp extends TypedExpression { self =>
 
-  def + (e: IntExp) = new DoubleExp {
+  def +(e: IntExp) = new DoubleExp {
     def content = s"${self.content} + ${e.content}"
   }
 
-  def + (e: DoubleExp) = new DoubleExp {
+  def +(e: DoubleExp) = new DoubleExp {
     def content = s"${self.content} + ${e.content}"
   }
 
-  def - (e: IntExp) = new DoubleExp {
+  def -(e: IntExp) = new DoubleExp {
     def content = s"${self.content} - ${e.content}"
   }
 
-  def - (e: DoubleExp) = new DoubleExp {
+  def -(e: DoubleExp) = new DoubleExp {
     def content = s"${self.content} - ${e.content}"
   }
 
-  def * (e: IntExp) = new DoubleExp {
+  def *(e: IntExp) = new DoubleExp {
     def content = s"${self.content} * ${e.content}"
   }
 
-  def * (e: DoubleExp) = new DoubleExp {
+  def *(e: DoubleExp) = new DoubleExp {
     def content = s"${self.content} * ${e.content}"
   }
 
-  def / (e: IntExp) = new DoubleExp {
+  def /(e: IntExp) = new DoubleExp {
     def content = s"${self.content} / ${e.content}"
   }
 
-  def / (e: DoubleExp) = new DoubleExp {
+  def /(e: DoubleExp) = new DoubleExp {
     def content = s"${self.content} / ${e.content}"
   }
 
-  def ^ (e: IntExp) = new DoubleExp {
+  def ^(e: IntExp) = new DoubleExp {
     def content = s"${self.content} ^ ${e.content}"
   }
 
-  def ^ (e: DoubleExp) = new DoubleExp {
+  def ^(e: DoubleExp) = new DoubleExp {
     def content = s"${self.content} ^ ${e.content}"
   }
 
@@ -129,7 +129,7 @@ trait DoubleExp extends TypedExpression { self =>
 
 trait StringExp extends TypedExpression { self =>
 
-  def + (e: StringExp) = new StringExp {
+  def +(e: StringExp) = new StringExp {
     def content = s"${self.content} + ${e.content}"
   }
 
@@ -150,22 +150,22 @@ trait DateTimeExp extends TypedExpression {
     Try(Minute(period.getMinutes))
   ).flatMap(_.toOption).foldLeft(this)(_ + _)
 
-  def + (period: Duration): DateTimeExp = period match {
+  def +(period: Duration): DateTimeExp = period match {
     case Minute(n) => PlusMinutes(this, IntConstantExp(n))
-    case Hour(n) => PlusHours(this, IntConstantExp(n))
-    case Day(n) => PlusDays(this, IntConstantExp(n))
-    case Week(n) => PlusWeeks(this, IntConstantExp(n))
-    case Month(n) => PlusMonths(this, IntConstantExp(n))
-    case Year(n) => PlusYears(this, IntConstantExp(n))
+    case Hour(n)   => PlusHours(this, IntConstantExp(n))
+    case Day(n)    => PlusDays(this, IntConstantExp(n))
+    case Week(n)   => PlusWeeks(this, IntConstantExp(n))
+    case Month(n)  => PlusMonths(this, IntConstantExp(n))
+    case Year(n)   => PlusYears(this, IntConstantExp(n))
   }
 
-  def - (period: Duration): DateTimeExp = period match {
+  def -(period: Duration): DateTimeExp = period match {
     case Minute(n) => MinusMinutes(this, IntConstantExp(n))
-    case Hour(n) => MinusHours(this, IntConstantExp(n))
-    case Day(n) => MinusDays(this, IntConstantExp(n))
-    case Week(n) => MinusWeeks(this, IntConstantExp(n))
-    case Month(n) => MinusMonths(this, IntConstantExp(n))
-    case Year(n) => MinusYears(this, IntConstantExp(n))
+    case Hour(n)   => MinusHours(this, IntConstantExp(n))
+    case Day(n)    => MinusDays(this, IntConstantExp(n))
+    case Week(n)   => MinusWeeks(this, IntConstantExp(n))
+    case Month(n)  => MinusMonths(this, IntConstantExp(n))
+    case Year(n)   => MinusYears(this, IntConstantExp(n))
   }
 
   def year: IntExp = ExtractYear(this)

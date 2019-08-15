@@ -17,7 +17,7 @@ object AdpJsonSerializer {
   case object DateTimeSerializer extends CustomSerializer[DateTime](format => (
     {
       case JString(s) => new DateTime(s, DateTimeZone.UTC)
-      case JNull => null
+      case JNull      => null
     },
     {
       case d: DateTime =>
@@ -39,12 +39,12 @@ object AdpJsonSerializer {
     implicit val formats = DefaultFormats + FieldSerializer[A]() + DateTimeSerializer + AdpRefSerializer
 
     obj match {
-      case o: AdpParameter => Extraction.decompose(o)
+      case o: AdpParameter          => Extraction.decompose(o)
       case o: AdpDataPipelineObject => Extraction.decompose(o)
       case o: AdpDataPipelineDefaultObject =>
         def jsonAppend(json: JObject, pair: (String, Either[String, AdpRef[AdpDataPipelineAbstractObject]])) = {
           pair match {
-            case (k, Left(v)) => json ~ (k -> v)
+            case (k, Left(v))  => json ~ (k -> v)
             case (k, Right(v)) => json ~ (k -> (refKey -> v.objId))
           }
         }

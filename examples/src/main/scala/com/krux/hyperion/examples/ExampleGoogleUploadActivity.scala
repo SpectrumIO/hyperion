@@ -4,10 +4,9 @@ import com.typesafe.config.ConfigFactory
 
 import com.krux.hyperion.activity.GoogleStorageUploadActivity
 import com.krux.hyperion.datanode.S3DataNode
-import com.krux.hyperion.{DataPipelineDef, HyperionCli, HyperionContext, RecurringSchedule, Schedule}
+import com.krux.hyperion.{ DataPipelineDef, HyperionCli, HyperionContext, RecurringSchedule, Schedule }
 import com.krux.hyperion.resource.Ec2Resource
 import com.krux.hyperion.workflow.WorkflowExpression
-
 
 object ExampleGoogleUploadActivity extends DataPipelineDef with HyperionCli {
 

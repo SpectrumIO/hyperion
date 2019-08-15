@@ -6,7 +6,7 @@ import org.joda.time.DateTime
 
 import com.krux.hyperion.adt._
 import com.krux.hyperion.aws.AdpParameter
-import com.krux.hyperion.common.{HdfsUri, S3Uri}
+import com.krux.hyperion.common.{ HdfsUri, S3Uri }
 
 /**
  * Defines and builds Parameter and returns the specific type instead of the paraent type.
@@ -41,7 +41,7 @@ trait ParameterBuilder[T, +Self <: Parameter[T] with ParameterBuilder[T, Self]] 
  * The Parameter class which hides the ParameterBuilder class. Note that the parameter abstract
  * class also belongs to the GenericParameter type class
  */
-sealed abstract class Parameter[T : GenericParameter] extends ParameterBuilder[T, Parameter[T]] {
+sealed abstract class Parameter[T: GenericParameter] extends ParameterBuilder[T, Parameter[T]] {
 
   val env = implicitly[GenericParameter[T]]
 
@@ -83,22 +83,22 @@ sealed abstract class Parameter[T : GenericParameter] extends ParameterBuilder[T
 
 object Parameter {
 
-  def apply[T : GenericParameter](id: String)(implicit pv: ParameterValues): UnencryptedParameter[T] =
+  def apply[T: GenericParameter](id: String)(implicit pv: ParameterValues): UnencryptedParameter[T] =
     new UnencryptedParameter(ParameterFields(id = id))
 
-  def apply[T : GenericParameter](id: String, value: T)(implicit pv: ParameterValues): UnencryptedParameter[T] =
+  def apply[T: GenericParameter](id: String, value: T)(implicit pv: ParameterValues): UnencryptedParameter[T] =
     (new UnencryptedParameter[T](ParameterFields(id = id)) with Evaluatable[T]).withValue(value)
 
-  def unencrypted[T : GenericParameter](id: String)(implicit pv: ParameterValues): UnencryptedParameter[T] =
+  def unencrypted[T: GenericParameter](id: String)(implicit pv: ParameterValues): UnencryptedParameter[T] =
     apply(id)
 
-  def unencrypted[T : GenericParameter](id: String, value: T)(implicit pv: ParameterValues): UnencryptedParameter[T] =
+  def unencrypted[T: GenericParameter](id: String, value: T)(implicit pv: ParameterValues): UnencryptedParameter[T] =
     apply(id, value)
 
-  def encrypted[T : GenericParameter](id: String)(implicit pv: ParameterValues): EncryptedParameter[T] =
+  def encrypted[T: GenericParameter](id: String)(implicit pv: ParameterValues): EncryptedParameter[T] =
     new EncryptedParameter(ParameterFields(id = id))
 
-  def encrypted[T : GenericParameter](id: String, value: T)(implicit pv: ParameterValues): EncryptedParameter[T] =
+  def encrypted[T: GenericParameter](id: String, value: T)(implicit pv: ParameterValues): EncryptedParameter[T] =
     (new EncryptedParameter[T](ParameterFields(id = id)) with Evaluatable[T]).withValue(value)
 
   implicit def stringParameter2HString(p: Parameter[String]): HString = HString(
@@ -162,7 +162,7 @@ object Parameter {
 /**
  * UnencryptedParameter is subtype of Parameter and belongs to the type class GenericParameter
  */
-case class UnencryptedParameter[T : GenericParameter](parameterFields: ParameterFields)
+case class UnencryptedParameter[T: GenericParameter](parameterFields: ParameterFields)
   extends Parameter[T]
   with ParameterBuilder[T, UnencryptedParameter[T]] {
 
@@ -177,7 +177,7 @@ case class UnencryptedParameter[T : GenericParameter](parameterFields: Parameter
 /**
  * EncryptedParameter is subtype of Parameter and belongs to the type class GenericParameter
  */
-case class EncryptedParameter[T : GenericParameter](parameterFields: ParameterFields)
+case class EncryptedParameter[T: GenericParameter](parameterFields: ParameterFields)
   extends Parameter[T]
   with ParameterBuilder[T, EncryptedParameter[T]] {
 

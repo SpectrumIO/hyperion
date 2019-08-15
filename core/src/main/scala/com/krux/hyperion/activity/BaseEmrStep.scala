@@ -3,7 +3,6 @@ package com.krux.hyperion.activity
 import com.krux.hyperion.adt.HString
 import com.krux.hyperion.common.Escapable
 
-
 trait BaseEmrStep {
 
   def jarUri: HString

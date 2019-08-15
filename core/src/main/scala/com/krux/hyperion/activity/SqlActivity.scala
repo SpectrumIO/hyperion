@@ -12,12 +12,12 @@ import com.krux.hyperion.resource.{ Resource, Ec2Resource }
  * a new table with that name is created.
  */
 case class SqlActivity private (
-  baseFields: BaseFields,
+  baseFields:     BaseFields,
   activityFields: ActivityFields[Ec2Resource],
-  script: Script,
+  script:         Script,
   scriptArgument: Seq[HString],
-  database: Database,
-  queue: Option[HString]
+  database:       Database,
+  queue:          Option[HString]
 ) extends PipelineActivity[Ec2Resource] {
 
   type Self = SqlActivity

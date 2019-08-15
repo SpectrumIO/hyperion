@@ -11,9 +11,9 @@ import com.krux.hyperion.HyperionContext
  * @param tableName The DynamoDB table to check.
  */
 case class DynamoDBDataExistsPrecondition private (
-  baseFields: BaseFields,
+  baseFields:         BaseFields,
   preconditionFields: PreconditionFields,
-  tableName: HString
+  tableName:          HString
 ) extends Precondition {
 
   type Self = DynamoDBDataExistsPrecondition

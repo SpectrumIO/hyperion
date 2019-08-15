@@ -1,13 +1,16 @@
-val hyperionVersion = "5.4.1"
+val hyperionVersion = "6.0.0"
 val scala211Version = "2.11.12"
 val scala212Version = "2.12.8"
 val awsSdkVersion   = "[1.11.238, 1.12.0)"
 val mailVersion     = "1.6.1"
 val slf4jVersion    = "1.7.25"
 
+val scalatestArtifact       = "org.scalatest"          %% "scalatest"                 % "3.0.5"  % Test
+val scalacheckArtifact      = "org.scalacheck"         %% "scalacheck"                % "1.13.5" % Test
+
 val nscalaTimeArtifact      = "com.github.nscala-time" %% "nscala-time"               % "2.18.0"
-val jodaConvertArtifact     = "org.joda"               %  "joda-convert"              % "2.0"    % "provided"
-val json4sJacksonArtifact   = "org.json4s"             %% "json4s-jackson"            % "3.5.3"
+val jodaConvertArtifact     = "org.joda"               %  "joda-convert"              % "2.0"   % Provided
+val json4sJacksonArtifact   = "org.json4s"             %% "json4s-jackson"            % "3.2.11"   excludeAll("com.fasterxml.jackson")
 val scoptArtifact           = "com.github.scopt"       %% "scopt"                     % "3.7.0"
 val jschArtifact            = "com.jcraft"             %  "jsch"                      % "0.1.54"
 val configArtifact          = "com.typesafe"           %  "config"                    % "1.3.2"
@@ -20,37 +23,15 @@ val awsSnsArtifact          = "com.amazonaws"          %  "aws-java-sdk-sns"    
 val mailArtifact            = "com.sun.mail"           %  "mailapi"                   % mailVersion
 val smtpArtifact            = "com.sun.mail"           %  "smtp"                      % mailVersion
 val slf4jApiArtifact        = "org.slf4j"              %  "slf4j-api"                 % slf4jVersion
-val slf4jSimpleArtifact     = "org.slf4j"              %  "slf4j-simple"              % slf4jVersion
-val scalatestArtifact       = "org.scalatest"          %% "scalatest"                 % "3.0.5"  % "test"
-val scalacheckArtifact      = "org.scalacheck"         %% "scalacheck"                % "1.13.5" % "test"
 val stubbornArtifact        = "com.krux"               %% "stubborn"                  % "1.3.0"
 
-scalaVersion in ThisBuild := scala212Version
+scalaVersion in ThisBuild := scala211Version
 
 lazy val publishSettings = Seq(
-  sonatypeProfileName := "com.krux",
   publishMavenStyle := true,
   pomIncludeRepository := { _ => false },
-  pgpSecretRing := file("secring.asc"),
-  pgpPublicRing := file("pubring.asc"),
   licenses := Seq("Apache-2.0" -> url("http://opensource.org/licenses/Apache-2.0")),
-  homepage := Some(url("https://github.com/krux/hyperion")),
-  scmInfo := Some(
-    ScmInfo(
-      url("https://github.com/krux/hyperion"),
-      "scm:git:git@github.com:krux/hyperion.git"
-    )
-  ),
-  developers := List(
-    Developer(id = "realstraw", name = "Kexin Xie", email = "kexin.xie@salesforce.com", url = url("http://github.com/realstraw")),
-    Developer(id = "sethyates", name = "Seth Yates", email = "syates@salesforce.com", url = url("http://github.com/sethyates"))
-  ),
-  publishTo := {
-    if (isSnapshot.value)
-      Some("snapshots" at "https://oss.sonatype.org/content/repositories/snapshots")
-    else
-      Some("releases" at "https://oss.sonatype.org/service/local/staging/deploy/maven2")
-  }
+  homepage := Some(url("https://github.com/SpectrumIO/hyperion")),
 )
 
 lazy val noPublishSettings = Seq(
@@ -62,7 +43,7 @@ lazy val noPublishSettings = Seq(
 )
 
 lazy val commonSettings = Seq(
-  organization := "com.krux",
+  organization := "io.getspectrum",
   version := hyperionVersion,
   crossScalaVersions := Seq(
     scala211Version,
@@ -103,7 +84,7 @@ lazy val root = (project in file(".")).
     name := "hyperion",
     siteSubdirName in ScalaUnidoc := "latest/api",
     addMappingsToSiteDir(mappings in (ScalaUnidoc, packageDoc), siteSubdirName in ScalaUnidoc),
-    git.remoteRepo := "git@github.com:krux/hyperion.git"
+    git.remoteRepo := "git@github.com:SpectrumIO/hyperion.git"
   ).
   dependsOn(
     core,
@@ -144,8 +125,7 @@ lazy val examples = (project in file("examples")).
   settings(commonSettings: _*).
   settings(noPublishSettings: _*).
   settings(
-    name := "hyperion-examples",
-    libraryDependencies += slf4jSimpleArtifact
+    name := "hyperion-examples"
   ).
   dependsOn(core, contribActivityDefinition)
 

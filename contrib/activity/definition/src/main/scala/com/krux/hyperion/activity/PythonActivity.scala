@@ -10,15 +10,15 @@ import com.krux.hyperion.resource.{ Ec2Resource, Resource }
  * Shell command activity that runs a given python script
  */
 case class PythonActivity private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[Ec2Resource],
+  baseFields:                 BaseFields,
+  activityFields:             ActivityFields[Ec2Resource],
   shellCommandActivityFields: ShellCommandActivityFields,
-  pythonScriptUri: Option[HS3Uri],
-  pythonScript: Option[HString],
-  pythonModule: Option[HString],
-  pythonRequirements: Option[HString],
-  pipIndexUrl: Option[HString],
-  pipExtraIndexUrls: Seq[HString]
+  pythonScriptUri:            Option[HS3Uri],
+  pythonScript:               Option[HString],
+  pythonModule:               Option[HString],
+  pythonRequirements:         Option[HString],
+  pipIndexUrl:                Option[HString],
+  pipExtraIndexUrls:          Seq[HString]
 ) extends BaseShellCommandActivity with WithS3Input with WithS3Output {
 
   type Self = PythonActivity

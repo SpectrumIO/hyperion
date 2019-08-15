@@ -2,7 +2,6 @@ package com.krux.hyperion.common
 
 import scala.annotation.tailrec
 
-
 trait Escapable {
 
   /**
@@ -14,8 +13,8 @@ trait Escapable {
    */
   @tailrec
   private def seekEndOfExpr(
-    exp: String,
-    quote: Option[Char] = None,
+    exp:     String,
+    quote:   Option[Char]  = None,
     expPart: StringBuilder = StringBuilder.newBuilder
   ): (String, String) = {
 
@@ -30,9 +29,9 @@ trait Escapable {
           seekEndOfExpr(next, quote.filter(_ != curChar), expPart += curChar)
         case _ =>
           curChar match {
-            case '}' => ((expPart += curChar).result, next)
+            case '}'        => ((expPart += curChar).result, next)
             case '\'' | '"' => seekEndOfExpr(next, Option(curChar), expPart += curChar)
-            case _ => seekEndOfExpr(next, None, expPart += curChar)
+            case _          => seekEndOfExpr(next, None, expPart += curChar)
           }
       }
     }
@@ -44,9 +43,9 @@ trait Escapable {
 
     @tailrec
     def escapeRec(
-      s: String,
-      hashSpotted: Boolean = false,
-      result: StringBuilder = StringBuilder.newBuilder
+      s:           String,
+      hashSpotted: Boolean       = false,
+      result:      StringBuilder = StringBuilder.newBuilder
     ): String = {
 
       if (s.isEmpty) {
@@ -55,13 +54,13 @@ trait Escapable {
         val curChar = s.head
         val sTail = s.tail
 
-        if (!hashSpotted) {  // outside an expression block
+        if (!hashSpotted) { // outside an expression block
           escapeRec(sTail, curChar == '#', result ++= escapeChar(curChar))
-        } else {  // the previous char is '#'
-          if (curChar == '{') {  // start of an expression
+        } else { // the previous char is '#'
+          if (curChar == '{') { // start of an expression
             val (blockBody, rest) = seekEndOfExpr(sTail)
             escapeRec(rest, false, result += curChar ++= blockBody)
-          } else {  // not start of an expression
+          } else { // not start of an expression
             escapeRec(sTail, false, result ++= escapeChar(curChar))
           }
         }

@@ -8,8 +8,8 @@ import com.krux.hyperion.resource.{ Resource, Ec2Resource }
  * Runs a command or script
  */
 case class ShellCommandActivity private (
-  baseFields: BaseFields,
-  activityFields: ActivityFields[Ec2Resource],
+  baseFields:                 BaseFields,
+  activityFields:             ActivityFields[Ec2Resource],
   shellCommandActivityFields: ShellCommandActivityFields
 ) extends BaseShellCommandActivity with WithS3Input with WithS3Output {
 
